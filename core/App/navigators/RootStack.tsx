@@ -5,7 +5,7 @@ import {
   HttpOutboundTransport,
   LogLevel,
   MediatorPickupStrategy,
-  WsOutboundTransport,
+  WsOutboundTransport
 } from '@aries-framework/core'
 import { agentDependencies } from '@aries-framework/react-native'
 import { useNavigation } from '@react-navigation/core'
@@ -13,9 +13,7 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Config } from 'react-native-config'
-import SplashScreen from 'react-native-splash-screen'
 import Toast from 'react-native-toast-message'
-
 import indyLedgers from '../../configs/ledgers/indy'
 import { ToastType } from '../components/toast/BaseToast'
 import { useConfiguration } from '../contexts/configuration'
@@ -28,14 +26,17 @@ import PinCreate from '../screens/PinCreate'
 import PinEnter from '../screens/PinEnter'
 import { StateFn } from '../types/fn'
 import { AuthenticateStackParams, Screens, Stacks } from '../types/navigators'
-
 import ConnectStack from './ConnectStack'
 import ContactStack from './ContactStack'
+import { createDefaultStackOptions } from './defaultStackOptions'
 import DeliveryStack from './DeliveryStack'
 import NotificationStack from './NotificationStack'
 import SettingStack from './SettingStack'
 import TabStack from './TabStack'
-import { createDefaultStackOptions } from './defaultStackOptions'
+
+
+
+const RNFS = require('react-native-fs')
 
 interface RootStackProps {
   setAgent: React.Dispatch<React.SetStateAction<Agent | undefined>>
@@ -62,6 +63,8 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
     })
     navigation.navigate(Screens.Terms)
   }
+
+  const path = RNFS.DocumentDirectoryPath + '/keystore.txt'
 
   const initAgent = async () => {
     if (initAgentInProcess) {
@@ -99,6 +102,20 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
       await newAgent.initialize()
       setAgent(newAgent) // -> This will set the agent in the global provider
       setAgentInitDone(true)
+
+      console.log('newAgent.wallet', newAgent.wallet.export)
+
+      newAgent.wallet
+        .export({
+          path,
+          key: '',
+        })
+        .then((res) => {
+          console.log('newAgent.wallet', res)
+        })
+        .catch((err) => {
+          console.log('newAgent.wallet error', err)
+        })
 
       dispatch({ type: DispatchAction.LOADING_DISABLED })
     } catch (e: unknown) {
