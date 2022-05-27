@@ -22,6 +22,7 @@ export enum Screens {
   Connection = 'Connection',
   OnTheWay = 'On The Way',
   Declined = 'Declined',
+  Export = 'Export',
 }
 
 export enum Stacks {
@@ -87,6 +88,7 @@ export type ConnectStackParams = {
 export type SettingStackParams = {
   [Screens.Settings]: undefined
   [Screens.Language]: undefined
+  [Screens.Export]: undefined
 }
 
 export type NotificationStackParams = {

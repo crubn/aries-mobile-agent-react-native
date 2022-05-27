@@ -161,6 +161,8 @@ const translation = {
     "AppPreferences": "App Preferences",
     "AboutApp": "About App",
     "Language": "Language",
+    "Wallet": "Wallet",
+    "Export": "Export"
   },
   "TabStack": {
     "Home": "Home",

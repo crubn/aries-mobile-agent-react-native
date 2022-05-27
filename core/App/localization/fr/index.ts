@@ -148,7 +148,8 @@ const translation = {
         "VersionString": "0.0.0-0",
         "AppPreferences": "Préférences de l'application",
         "AboutApp": "À propos de l'application",
-        "Language": "Langue"
+        "Language": "Langue",
+        "Export": "Export"
     },
     "TabStack": {
         "Home": "Accueil",

@@ -13,7 +13,6 @@ import { useNavigation } from '@react-navigation/core'
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionsAndroid } from 'react-native'
 import { Config } from 'react-native-config'
 import Toast from 'react-native-toast-message'
 import indyLedgers from '../../configs/ledgers/indy'
@@ -75,46 +74,6 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
     //Flag to protect the init process from being duplicated
     setInitAgentInProcess(true)
 
-    const saveData = async (newAgent) => {
-      try {
-        const granted = await PermissionsAndroid.requestMultiple([
-          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        ])
-      } catch (err) {
-        console.warn(err)
-      }
-      const readGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE)
-      const writeGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
-      if (!readGranted || !writeGranted) {
-        console.log('Read and write permissions have not been granted')
-        return
-      }
-      // // const path = RNFS.ExternalStorageDirectoryPath + '/Test'
-      // // RNFS.mkdir(path)
-      // const backupKey = 'someBackupKey'
-      // const random = Math.floor(Math.random() * 10000)
-      // const backupWalletName = `backup-${random}`
-      // const path1 = `${RNFS.DocumentDirectoryPath}/${backupWalletName}`
-
-      // // const path2 = '/storage/emulated/0/com.ariesbifold/files/' + backupWalletName
-
-      // console.log('newAgent.wallet', newAgent.wallet.export, path1)
-
-      // // newAgent.wallet
-      // //   .export({
-      // //     path: path1,
-      // //     key: backupKey,
-      // //   })
-      // //   .then((res) => {
-      // //     console.log('newAgent.wallet', res)
-      // //   })
-      // //   .catch((err) => {
-      // //     console.log('newAgent.wallet error', err)
-      // //   })
-      // await newAgent.wallet.export({ path: path1, key: backupKey })
-    }
-
     try {
       const newAgent = new Agent(
         {
@@ -169,15 +128,15 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
       //   console.log('No wallet config on bobAgent')
       // }
 
-      const backupKey = 'backupkey'
-      const random = Math.floor(Math.random() * 10000)
-      const backupWalletName = `backup-${random}`
-      const path1 = `${RNFS.ExternalStorageDirectoryPath}/${backupWalletName}`
-      const path2 = `${RNFS.ExternalStorageDirectoryPath}/${backupWalletName}`
+      // const backupKey = 'backupkey'
+      // const random = Math.floor(Math.random() * 10000)
+      // const backupWalletName = `backup-${random}`
+      // const path1 = `${RNFS.ExternalStorageDirectoryPath}/${backupWalletName}`
+      // const path2 = `${RNFS.ExternalStorageDirectoryPath}/${backupWalletName}`
 
-      console.log('newAgent.wallet', newAgent.wallet.export, path1, newAgent.config.walletConfig)
+      // console.log('newAgent.wallet', newAgent.wallet.export, path1, newAgent.config.walletConfig)
 
-      await newAgent.wallet.export({ path: path1, key: backupKey })
+      // await newAgent.wallet.export({ path: path1, key: backupKey })
 
       // await newAgent.wallet.delete()
 
@@ -205,27 +164,6 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
       initAgent()
     }
   }, [authenticated])
-
-  const [files, setFiles] = useState([])
-  const [fileData, setFileData] = useState()
-
-  const getFileContent = async (path) => {
-    const reader = await RNFS.readDir(path)
-    setFiles(reader)
-  }
-
-  const readFile = async (path) => {
-    const response = await RNFS.readFile(path)
-    console.log('-----fileData-----', response)
-    setFileData(response) //set the value of response to the fileData Hook.
-  }
-
-  useEffect(() => {
-    getFileContent(RNFS.DocumentDirectoryPath) //run the function on the first render.
-    // readFile('/data/user/0/com.ariesbifold/files/backup-3239')
-  }, [])
-
-  console.log('files', files)
 
   const authStack = (setAuthenticated: StateFn) => {
     const Stack = createStackNavigator()
