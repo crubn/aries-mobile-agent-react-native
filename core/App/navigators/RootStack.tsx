@@ -21,6 +21,7 @@ import { useConfiguration } from '../contexts/configuration'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
+import ImportWallet from '../screens/ImportWallet'
 import Onboarding from '../screens/Onboarding'
 import { createCarouselStyle } from '../screens/OnboardingPages'
 import PinCreate from '../screens/PinCreate'
@@ -90,14 +91,6 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
         agentDependencies
       )
 
-      // const imp = await newAgent.wallet.import(
-      //   { id: 'wallet4', key: '123' },
-      //   // { path: `/data/user/0/com.ariesbifold/files/backup-2679`, key: 'someBackupKey' }
-      //   { path: `/storage/emulated/0/backup-7693`, key: 'someBackupKey' }
-      // )
-      // console.log('import', imp)
-      // await newAgent.wallet.initialize({ id: 'wallet4', key: '123' })
-
       const wsTransport = new WsOutboundTransport()
       const httpTransport = new HttpOutboundTransport()
 
@@ -108,44 +101,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
       setAgent(newAgent) // -> This will set the agent in the global provider
       setAgentInitDone(true)
 
-      // saveData(newAgent)
-
       dispatch({ type: DispatchAction.LOADING_DISABLED })
-
-      // const bobBasicMessageRepository = newAgent.injectionContainer.resolve(BasicMessageRepository)
-
-      // const basicMessageRecord = new BasicMessageRecord({
-      //   id: 'wallet4',
-      //   connectionId: 'connId',
-      //   content: 'hello',
-      //   role: BasicMessageRole.Receiver,
-      //   sentTime: 'sentIt',
-      // })
-
-      // await bobBasicMessageRepository.save(basicMessageRecord)
-
-      // if (!newAgent.config.walletConfig) {
-      //   console.log('No wallet config on bobAgent')
-      // }
-
-      // const backupKey = 'backupkey'
-      // const random = Math.floor(Math.random() * 10000)
-      // const backupWalletName = `backup-${random}`
-      // const path1 = `${RNFS.ExternalStorageDirectoryPath}/${backupWalletName}`
-      // const path2 = `${RNFS.ExternalStorageDirectoryPath}/${backupWalletName}`
-
-      // console.log('newAgent.wallet', newAgent.wallet.export, path1, newAgent.config.walletConfig)
-
-      // await newAgent.wallet.export({ path: path1, key: backupKey })
-
-      // await newAgent.wallet.delete()
-
-      // const imp = await newAgent.wallet.import(
-      //   { id: 'wallet4', key: '123' },
-      //   { path: `/data/user/0/com.ariesbifold/files/${backupWalletName}`, key: backupKey }
-      // )
-      // console.log('import', imp)
-      // await newAgent.wallet.initialize({ id: 'wallet4', key: '123' })
     } catch (e: unknown) {
       Toast.show({
         type: ToastType.Error,
@@ -160,7 +116,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
   }
 
   useEffect(() => {
-    if (authenticated && !agentInitDone) {
+    if (authenticated && !agentInitDone && state.onboarding.didShowImportWallet) {
       initAgent()
     }
   }, [authenticated])
@@ -232,11 +188,23 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
         <Stack.Screen name={Screens.CreatePin}>
           {(props) => <PinCreate {...props} setAuthenticated={setAuthenticated} />}
         </Stack.Screen>
+        <Stack.Screen name={Screens.ImportWallet}>
+          {(props) => (
+            <ImportWallet {...props} setAgent={(data) => setAgent(data)} setAuthenticated={setAuthenticated} />
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     )
   }
 
-  if (state.onboarding.didAgreeToTerms && state.onboarding.didCompleteTutorial && state.onboarding.didCreatePIN) {
+  console.log('state', state.onboarding)
+
+  if (
+    state.onboarding.didAgreeToTerms &&
+    state.onboarding.didCompleteTutorial &&
+    state.onboarding.didCreatePIN &&
+    state.onboarding.didShowImportWallet
+  ) {
     return authenticated ? mainStack() : authStack(setAuthenticated)
   }
 

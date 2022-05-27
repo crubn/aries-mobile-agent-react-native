@@ -1,11 +1,12 @@
 import { CredentialRecord } from '@aries-framework/core'
-
 import { BifoldError } from './error'
+
 
 export interface Onboarding {
   didCompleteTutorial: boolean
   didAgreeToTerms: boolean
   didCreatePIN: boolean
+  didShowImportWallet: boolean
 }
 
 // FIXME: Once hooks are updated this should no longer be necessary

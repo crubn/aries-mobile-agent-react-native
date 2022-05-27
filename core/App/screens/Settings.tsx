@@ -58,6 +58,8 @@ const Settings: React.FC<SettingsProps> = ({ navigation }) => {
           type: ToastType.Success,
           text1: 'Wallet exported successfully',
           text2: path,
+          visibilityTime: 3000,
+          position: 'bottom',
         })
       })
       .catch((err) => {

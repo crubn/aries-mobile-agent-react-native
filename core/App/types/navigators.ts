@@ -23,6 +23,7 @@ export enum Screens {
   OnTheWay = 'On The Way',
   Declined = 'Declined',
   Export = 'Export',
+  ImportWallet = 'ImportWallet',
 }
 
 export enum Stacks {
@@ -62,6 +63,7 @@ export type AuthenticateStackParams = {
   [Screens.Terms]: undefined
   [Screens.CreatePin]: { setAuthenticated: (auth: boolean) => void } | undefined
   [Screens.EnterPin]: { setAuthenticated: (auth: boolean) => void } | undefined
+  [Screens.ImportWallet]: { setAuthenticated: (auth: boolean) => void; setAgent: null } | undefined
 }
 
 export type ContactStackParams = {

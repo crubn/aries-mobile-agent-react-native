@@ -1,15 +1,18 @@
+import { useNavigation } from '@react-navigation/core'
+import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Alert, Keyboard, StyleSheet } from 'react-native'
 import * as Keychain from 'react-native-keychain'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
 import Button, { ButtonType } from '../components/buttons/Button'
 import TextInput from '../components/inputs/TextInput'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
+import { AuthenticateStackParams, Screens } from '../types/navigators'
 import { testIdWithKey } from '../utils/testable'
+
 
 interface PinCreateProps {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
@@ -21,12 +24,15 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
   const [, dispatch] = useStore()
   const { t } = useTranslation()
   const { ColorPallet } = useTheme()
+  const navigation = useNavigation<StackNavigationProp<AuthenticateStackParams>>()
+
   const style = StyleSheet.create({
     container: {
       backgroundColor: ColorPallet.brand.primaryBackground,
       margin: 20,
     },
   })
+
   const passcodeCreate = async (pin: string) => {
     const passcode = JSON.stringify(pin)
     const description = t('PinCreate.UserAuthenticationPin')
@@ -38,6 +44,7 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
       dispatch({
         type: DispatchAction.DID_CREATE_PIN,
       })
+      navigation.navigate(Screens.ImportWallet)
     } catch (e) {
       // TODO:(jl)
     }

@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import { LocalStorageKeys } from '../../constants'
-import { Onboarding as OnboardingState, Credential as CredentialState, State } from '../../types/state'
+import { Credential as CredentialState, Onboarding as OnboardingState, State } from '../../types/state'
+
 
 enum OnboardingDispatchAction {
   ONBOARDING_UPDATED = 'onboarding/onboardingStateLoaded',
   DID_COMPLETE_TUTORIAL = 'onboarding/didCompleteTutorial',
   DID_AGREE_TO_TERMS = 'onboarding/didAgreeToTerms',
   DID_CREATE_PIN = 'onboarding/didCreatePin',
+  DID_SHOW_IMPORT_WALLET = 'onboarding/didShowImportWallet',
 }
 
 enum ErrorDispatchAction {
@@ -82,6 +83,18 @@ const reducer = (state: State, action: ReducerAction): State => {
       const onboarding: OnboardingState = {
         ...state.onboarding,
         didCreatePIN: true,
+      }
+      const newState = {
+        ...state,
+        onboarding,
+      }
+      AsyncStorage.setItem(LocalStorageKeys.Onboarding, JSON.stringify(newState.onboarding))
+      return newState
+    }
+    case OnboardingDispatchAction.DID_SHOW_IMPORT_WALLET: {
+      const onboarding: OnboardingState = {
+        ...state.onboarding,
+        didShowImportWallet: true,
       }
       const newState = {
         ...state,

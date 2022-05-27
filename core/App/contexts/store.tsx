@@ -1,8 +1,8 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react'
-
 import { State } from '../types/state'
-
 import reducer, { ReducerAction } from './reducers/store'
+
+
 
 export interface StoreProviderProps {
   children: any
@@ -13,6 +13,7 @@ const initialState: State = {
     didAgreeToTerms: false,
     didCompleteTutorial: false,
     didCreatePIN: false,
+    didShowImportWallet: false,
   },
   credential: {
     revoked: new Set(),

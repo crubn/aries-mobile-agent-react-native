@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Alert, Keyboard, StyleSheet } from 'react-native'
 import * as Keychain from 'react-native-keychain'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
 import Button, { ButtonType } from '../components/buttons/Button'
 import TextInput from '../components/inputs/TextInput'
 import { useTheme } from '../contexts/theme'
 import { testIdWithKey } from '../utils/testable'
+
 
 interface PinEnterProps {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
@@ -31,6 +31,10 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
       Alert.alert(t('PinEnter.IncorrectPin'))
     }
   }
+
+  // React.useEffect(() => {
+  //   setAuthenticated(true)
+  // }, [])
 
   return (
     <SafeAreaView style={[style.container]}>
