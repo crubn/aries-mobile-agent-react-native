@@ -1,14 +1,11 @@
-import { Agent } from '@aries-framework/core'
 import { useAgent } from '@aries-framework/react-hooks'
 import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { getBuildNumber, getVersion } from 'react-native-device-info'
-import Toast from 'react-native-toast-message'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { SafeAreaScrollView } from '../components'
-import { ToastType } from '../components/toast/BaseToast'
 import { useTheme } from '../contexts/theme'
 import { Screens, SettingStackParams, Stacks } from '../types/navigators'
 import { testIdWithKey } from '../utils/testable'
@@ -43,30 +40,6 @@ const Settings: React.FC<SettingsProps> = ({ navigation }) => {
     },
   })
 
-  const exportWallet = async (agent: Agent) => {
-    const backupKey = 'backupkey'
-    const random = Math.floor(Math.random() * 10000)
-    const backupWalletName = `backup-${random}`
-    const path = `${RNFS.ExternalStorageDirectoryPath}/aries-edge-agent/${backupWalletName}`
-
-    console.log('newAgent.wallet', agent.wallet.export, path, agent.config.walletConfig)
-
-    agent.wallet
-      .export({ path: path, key: backupKey })
-      .then((res) => {
-        Toast.show({
-          type: ToastType.Success,
-          text1: 'Wallet exported successfully',
-          text2: path,
-          visibilityTime: 3000,
-          position: 'bottom',
-        })
-      })
-      .catch((err) => {
-        console.log('err', err)
-      })
-  }
-
   return (
     <SafeAreaScrollView>
       <View style={styles.container}>
@@ -91,7 +64,8 @@ const Settings: React.FC<SettingsProps> = ({ navigation }) => {
             accessibilityLabel={t('Settings.Export')}
             testID={testIdWithKey('Language')}
             style={styles.row}
-            onPress={() => exportWallet(agent)}
+            onPress={() => navigation.navigate(Screens.Export)}
+            // onPress={() => exportWallet(agent)}
           >
             <Text style={SettingsTheme.text}>{t('Settings.Export')}</Text>
             <Icon name={'chevron-right'} size={25} color={SettingsTheme.iconColor} />

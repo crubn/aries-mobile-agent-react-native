@@ -26,6 +26,7 @@ import Onboarding from '../screens/Onboarding'
 import { createCarouselStyle } from '../screens/OnboardingPages'
 import PinCreate from '../screens/PinCreate'
 import PinEnter from '../screens/PinEnter'
+import WalletSetup from '../screens/WalletSetup'
 import { StateFn } from '../types/fn'
 import { AuthenticateStackParams, Screens, Stacks } from '../types/navigators'
 import ConnectStack from './ConnectStack'
@@ -35,7 +36,6 @@ import DeliveryStack from './DeliveryStack'
 import NotificationStack from './NotificationStack'
 import SettingStack from './SettingStack'
 import TabStack from './TabStack'
-
 const RNFS = require('react-native-fs')
 
 interface RootStackProps {
@@ -123,7 +123,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
 
   const authStack = (setAuthenticated: StateFn) => {
     const Stack = createStackNavigator()
-
+    console.log("inside authStack")
     return (
       <Stack.Navigator initialRouteName={Screens.Splash} screenOptions={{ ...defaultStackOptions, headerShown: false }}>
         <Stack.Screen name={Screens.EnterPin}>
@@ -135,7 +135,6 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
 
   const mainStack = () => {
     const Stack = createStackNavigator()
-
     return (
       <Stack.Navigator initialRouteName={Screens.Splash} screenOptions={{ ...defaultStackOptions, headerShown: false }}>
         <Stack.Screen name={Stacks.TabStack} component={TabStack} />
@@ -187,6 +186,11 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
         />
         <Stack.Screen name={Screens.CreatePin}>
           {(props) => <PinCreate {...props} setAuthenticated={setAuthenticated} />}
+        </Stack.Screen>
+        <Stack.Screen name={Screens.WalletSetup}>
+          {(props) => (
+            <WalletSetup {...props} setAgent={(data) => setAgent(data)} setAuthenticated={setAuthenticated} />
+          )}
         </Stack.Screen>
         <Stack.Screen name={Screens.ImportWallet}>
           {(props) => (

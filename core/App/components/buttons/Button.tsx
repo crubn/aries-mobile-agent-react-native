@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
-
 import { useTheme } from '../../contexts/theme'
+
 
 export enum ButtonType {
   Primary,
@@ -15,6 +15,7 @@ interface ButtonProps {
   testID?: string
   onPress?: () => void
   disabled?: boolean
+  styles: object
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   accessibilityLabel,
   testID,
   onPress,
+  styles,
   disabled = false,
 }) => {
   const accessible = accessibilityLabel && accessibilityLabel !== '' ? true : false
@@ -36,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
       style={[
         buttonType === ButtonType.Primary ? Buttons.primary : Buttons.secondary,
         disabled && (buttonType === ButtonType.Primary ? Buttons.primaryDisabled : Buttons.secondaryDisabled),
+        styles,
       ]}
       disabled={disabled}
       activeOpacity={heavyOpacity}

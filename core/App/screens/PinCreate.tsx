@@ -44,7 +44,7 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
       dispatch({
         type: DispatchAction.DID_CREATE_PIN,
       })
-      navigation.navigate(Screens.ImportWallet)
+      navigation.navigate(Screens.WalletSetup)
     } catch (e) {
       // TODO:(jl)
     }

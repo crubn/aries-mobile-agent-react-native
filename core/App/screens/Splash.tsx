@@ -4,7 +4,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useMemo } from 'react'
 import { Image, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
 import { LocalStorageKeys } from '../constants'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
@@ -12,11 +11,16 @@ import { useTheme } from '../contexts/theme'
 import { AuthenticateStackParams, Screens } from '../types/navigators'
 import { Onboarding as StoreOnboardingState } from '../types/state'
 
+
 const onboardingComplete = (state: StoreOnboardingState): boolean => {
-  return state.didCompleteTutorial && state.didAgreeToTerms && state.didCreatePIN
+  return state.didCompleteTutorial && state.didAgreeToTerms && state.didCreatePIN && state.didShowImportWallet
 }
 
 const resumeOnboardingAt = (state: StoreOnboardingState): Screens => {
+  if (state.didCompleteTutorial && state.didAgreeToTerms && state.didCreatePIN && !state.didShowImportWallet) {
+    return Screens.WalletSetup
+  }
+
   if (state.didCompleteTutorial && state.didAgreeToTerms && !state.didCreatePIN) {
     return Screens.CreatePin
   }
@@ -50,6 +54,7 @@ const Splash: React.FC = () => {
       try {
         // await AsyncStorage.removeItem(LocalStorageKeys.Onboarding)
         const data = await AsyncStorage.getItem(LocalStorageKeys.Onboarding)
+        console.log('data 53', data)
         if (data) {
           const onboardingState = JSON.parse(data) as StoreOnboardingState
           dispatch({ type: DispatchAction.ONBOARDING_UPDATED, payload: [onboardingState] })
