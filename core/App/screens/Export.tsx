@@ -1,8 +1,9 @@
 /* eslint-disable */
+//@ts-nocheck
 import { useAgent } from '@aries-framework/react-hooks'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ActivityIndicator, Clipboard, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Clipboard, PermissionsAndroid, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { DirectoryPickerResponse, DocumentPickerResponse } from 'react-native-document-picker'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
@@ -42,8 +43,33 @@ const ExportWallet: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
     },
   })
 
+  const requestStoragePermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: "Indisi Wallet App",
+          message:
+            "Indisi App needs access to your camera " +
+            "so you can use it properly",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK"
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use the external storage");
+      } else {
+        console.log("External storage permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   React.useEffect(() => {
-    generateRandomWords()
+    generateRandomWords();
+    requestStoragePermission();
   }, [])
 
   const copyToClipboard = () => {

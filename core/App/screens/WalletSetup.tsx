@@ -1,4 +1,5 @@
 /* eslint-disable */
+//@ts-nocheck
 import {
   Agent,
   AutoAcceptCredential,
@@ -98,9 +99,7 @@ import { testIdWithKey } from '../utils/testable'
           },
           agentDependencies
         )
-        dispatch({
-          type: DispatchAction.DID_SHOW_IMPORT_WALLET,
-        })
+       
   
         const wsTransport = new WsOutboundTransport()
         const httpTransport = new HttpOutboundTransport()
@@ -114,6 +113,9 @@ import { testIdWithKey } from '../utils/testable'
         setLoading(false)
 
         dispatch({ type: DispatchAction.LOADING_DISABLED })
+        dispatch({
+          type: DispatchAction.DID_SHOW_IMPORT_WALLET,
+        })
       } catch (e: unknown) {
         Toast.show({
           type: ToastType.Error,

@@ -1,15 +1,16 @@
-import type { BarCodeReadEvent } from 'react-native-camera'
-
+//@ts-nocheck
 import { Agent } from '@aries-framework/core'
 import { useAgent } from '@aries-framework/react-hooks'
 import { StackScreenProps } from '@react-navigation/stack'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import type { BarCodeReadEvent } from 'react-native-camera'
 import QRScanner from '../components/misc/QRScanner'
 import { BifoldError, QrCodeScanError } from '../types/error'
-import { ConnectStackParams, Screens, Stacks, TabStacks } from '../types/navigators'
+import { ConnectStackParams, Screens, Stacks } from '../types/navigators'
 import { isRedirection } from '../utils/helpers'
+
+
 
 type ScanProps = StackScreenProps<ConnectStackParams>
 
@@ -41,11 +42,14 @@ const Scan: React.FC<ScanProps> = ({ navigation }) => {
   }
 
   const handleInvitation = async (url: string): Promise<void> => {
+    console.log('agent', agent.connections, agent.connections.receiveInvitationFromUrl)
     try {
-      const connectionRecord = await agent?.connections.receiveInvitationFromUrl(url, {
+      const connectionRecord = await agent?.oob.receiveInvitationFromUrl(url, {
         autoAcceptConnection: true,
       })
-      if (!connectionRecord?.id) {
+      console.log('connection record', connectionRecord)
+      if (!connectionRecord?.connectionRecord.id) {
+        console.log('connectionRecord?.id)', connectionRecord?.id)
         throw new BifoldError(
           'Unable to accept connection',
           'There was a problem while accepting the connection.',
@@ -58,6 +62,7 @@ const Scan: React.FC<ScanProps> = ({ navigation }) => {
         params: { connectionId: connectionRecord.id },
       })
     } catch (err) {
+      console.log('error from handleInvitation', err)
       const error = new BifoldError(
         'Unable to accept connection',
         'There was a problem while accepting the connection.',
@@ -69,14 +74,18 @@ const Scan: React.FC<ScanProps> = ({ navigation }) => {
 
   const handleCodeScan = async (event: BarCodeReadEvent) => {
     setQrCodeScanError(null)
+    console.log('Scan.tsx', event)
     try {
       const url = event.data
       if (isRedirection(url)) {
+        console.log('inside isRedirection')
         await handleRedirection(url, agent)
       } else {
+        console.log('inside handleInvitation')
         await handleInvitation(url)
       }
     } catch (e: unknown) {
+      console.log('e', e)
       const error = new QrCodeScanError(t('Scan.InvalidQrCode'), event.data)
       setQrCodeScanError(error)
     }
