@@ -20,31 +20,65 @@ const Scan: React.FC<ScanProps> = ({ navigation }) => {
   const [qrCodeScanError, setQrCodeScanError] = useState<QrCodeScanError | null>(null)
 
   const handleRedirection = async (url: string, agent?: Agent): Promise<void> => {
-    try {
-      const res = await fetch(url, {
-        method: 'GET',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-      })
-      const message = await res.json()
-      await agent?.receiveMessage(message)
-      navigation.getParent()?.navigate(Stacks.ConnectionStack, {
-        screen: Screens.Connection,
-        params: { threadId: message['@id'] },
-      })
-    } catch (err: unknown) {
-      const error = new BifoldError(
-        'Unable to accept connection',
-        'There was a problem while accepting the connection redirection',
-        1024.1
-      )
-      throw error
+    // try {
+    // console.log('url', url)
+    // const res = await fetch(url, {
+    //   method: 'GET',
+    //   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    // })
+    // console.log('res', res)
+    // const message = await res.json()
+    // console.log('message', message)
+
+    // fetch(url, {
+    //   method: 'GET',
+    //   headers: { accept: 'application/json', 'Content-Type': 'application/json' },
+    // }).then((response) => {
+    //   console.log('response', response, typeof response)
+    //   response.json().then(async (message) => {
+    //     // code that can access both here
+    //     await agent?.receiveMessage(message)
+    //     navigation.getParent()?.navigate(Stacks.ConnectionStack, {
+    //       screen: Screens.Connection,
+    //       params: { threadId: message['@id'] },
+    //     })
+    //   })
+
+    const t = {
+      '@type': 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation',
+      '@id': 'abe13fce-5873-4b35-ad0d-d2251dfba96a',
+      services: [
+        {
+          id: '#inline',
+          type: 'did-communication',
+          recipientKeys: ['did:key:z6MkvnPKCFJERJ226LgWMzDgBKNJqzLRFnAeSV3o1Rz1pgAm'],
+          serviceEndpoint: 'https://cloudagent.indisi.crubn.com/agent',
+        },
+      ],
+      label: 'Invitation to Barry',
+      handshake_protocols: ['did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0'],
     }
+    await agent?.receiveMessage(t)
+    navigation.getParent()?.navigate(Stacks.ConnectionStack, {
+      screen: Screens.Connection,
+      params: { threadId: t['@id'] },
+    })
+    //   })
+    // } catch (err: unknown) {
+    //   console.log('err in handleRedirection', err)
+    //   const error = new BifoldError(
+    //     'Unable to accept connection',
+    //     'There was a problem while accepting the connection redirection',
+    //     1024.1
+    //   )
+    //   throw error
+    // }
   }
 
   const handleInvitation = async (url: string): Promise<void> => {
     console.log('agent', agent.connections, agent.connections.receiveInvitationFromUrl)
     try {
-      const connectionRecord = await agent?.oob.receiveInvitationFromUrl(url, {
+      const connectionRecord = await agent.oob.receiveInvitationFromUrl(url, {
         autoAcceptConnection: true,
       })
       console.log('connection record', connectionRecord)

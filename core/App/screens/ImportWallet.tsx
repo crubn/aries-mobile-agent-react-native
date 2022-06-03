@@ -1,5 +1,3 @@
-/* eslint-disable */
-//@ts-nocheck
 import {
   Agent,
   AutoAcceptCredential,
@@ -15,11 +13,15 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Clipboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Config } from 'react-native-config'
-import DocumentPicker, {
+import {
   DirectoryPickerResponse,
   DocumentPickerResponse,
-  isInProgress
+  isCancel,
+  isInProgress,
+  pickSingle
 } from 'react-native-document-picker'
+import RNFS from 'react-native-fs'
+import { PERMISSIONS, requestMultiple } from 'react-native-permissions'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import indyLedgers from '../../configs/ledgers/indy'
@@ -30,15 +32,13 @@ import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import { testIdWithKey } from '../utils/testable'
 
-const RNFS = require('react-native-fs')
 
-interface PinCreateProps {
+interface ImportWalletProps {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+  setAgent: React.Dispatch<React.SetStateAction<Agent | undefined>>
 }
 
-const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) => {
-  const [pin, setPin] = useState('')
-  const [pinTwo, setPinTwo] = useState('')
+const ImportWallet: React.FC<ImportWalletProps> = ({ setAuthenticated, setAgent }) => {
   const [loading, setLoading] = useState(false)
   const [, dispatch] = useStore()
   const { t } = useTranslation()
@@ -62,7 +62,7 @@ const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) 
   })
 
   const handleError = (err: unknown) => {
-    if (DocumentPicker.isCancel(err)) {
+    if (isCancel(err)) {
       console.warn('cancelled')
       // User cancelled the picker, exit any dialogs or menus and move on
     } else if (isInProgress(err)) {
@@ -71,12 +71,20 @@ const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) 
       throw err
     }
   }
-  const [agentInitDone, setAgentInitDone] = useState(false)
   const [initAgentInProcess, setInitAgentInProcess] = useState(false)
-  const [copiedText, setCopiedText] = useState('')
   const [paraphrase, setParaphrase] = useState('')
+  const [permission, setPermission] = useState(true)
 
   const getPath = (fileName: string) => `${RNFS.ExternalStorageDirectoryPath}/${fileName}`
+
+  React.useEffect(() => {
+    requestMultiple([PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE, PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE]).then(
+      (statuses) => {
+        console.log('WRITE_EXTERNAL_STORAGE', statuses)
+        console.log('READ_EXTERNAL_STORAGE')
+      }
+    )
+  }, [])
 
   const importWallet = async (fileName: string) => {
     // TODO: Show loading indicator here
@@ -110,7 +118,7 @@ const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) 
             key: paraphrase,
           }
         )
-        .then(async (res: Object) => {
+        .then(async () => {
           await newAgent.wallet.initialize({ id: 'wallet4', key: '123' })
           const wsTransport = new WsOutboundTransport()
           const httpTransport = new HttpOutboundTransport()
@@ -137,7 +145,7 @@ const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) 
             type: DispatchAction.DID_SHOW_IMPORT_WALLET,
           })
         })
-        .catch((err: Object) => {
+        .catch((err: Record<string, unknown>) => {
           console.log(err)
           setLoading(false)
           Toast.show({
@@ -203,10 +211,10 @@ const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) 
           buttonType={ButtonType.Primary}
           onPress={async () => {
             try {
-              if (paraphrase.split(' ').length === 15) {
+              if (paraphrase.split(' ').length === 15 && permission) {
                 setResult(null)
                 setLoading(true)
-                const pickerResult = await DocumentPicker.pickSingle({
+                const pickerResult = await pickSingle({
                   presentationStyle: 'fullScreen',
                   copyTo: 'cachesDirectory',
                 })
@@ -216,7 +224,7 @@ const ImportWallet: React.FC<PinCreateProps> = ({ setAuthenticated, setAgent }) 
               } else {
                 Toast.show({
                   type: ToastType.Error,
-                  text1: 'Please enter 15 letter paraphrase',
+                  text1: !permission ? 'Please Provide Media Access Permission' : 'Please enter 15 letter paraphrase',
                   text2: '',
                   visibilityTime: 2000,
                   position: 'bottom',

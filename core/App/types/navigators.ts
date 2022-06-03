@@ -23,7 +23,7 @@ export enum Screens {
   OnTheWay = 'On The Way',
   Declined = 'Declined',
   WalletSetup = 'Wallet Setup',
-  Export = 'Export Wallet',
+  ExportWallet = 'Export Wallet',
   ImportWallet = 'Import Wallet',
 }
 
@@ -92,7 +92,7 @@ export type ConnectStackParams = {
 export type SettingStackParams = {
   [Screens.Settings]: undefined
   [Screens.Language]: undefined
-  [Screens.Export]: undefined
+  [Screens.ExportWallet]: undefined
 }
 
 export type NotificationStackParams = {

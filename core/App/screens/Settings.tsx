@@ -64,7 +64,7 @@ const Settings: React.FC<SettingsProps> = ({ navigation }) => {
             accessibilityLabel={t('Settings.Export')}
             testID={testIdWithKey('Language')}
             style={styles.row}
-            onPress={() => navigation.navigate(Screens.Export)}
+            onPress={() => navigation.navigate(Screens.ExportWallet)}
             // onPress={() => exportWallet(agent)}
           >
             <Text style={SettingsTheme.text}>{t('Settings.Export')}</Text>

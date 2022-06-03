@@ -128,6 +128,7 @@
   },
   "dependencies": {
     "indy-sdk-react-native": "^0.2.0",
-    "react-native-document-picker": "^8.1.0"
+    "react-native-document-picker": "^8.1.0",
+    "react-native-permissions": "^3.3.1"
   }
 }
