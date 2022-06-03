@@ -57,11 +57,6 @@ const App = () => {
     TouchID.isSupported(optionalConfigObject)
       .then((biometryType) => {
         // Success code
-        if (biometryType === "FaceID") {
-          console.log("FaceID is supported.");
-        } else {
-          console.log("TouchID is supported.");
-        }
         TouchID.authenticate("Open App", optionalConfigObject)
           .then(() => {
             setBioAuth(true);
