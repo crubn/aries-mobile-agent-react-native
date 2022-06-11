@@ -33,6 +33,10 @@ const translation = {
     "English": "English",
     "French": "French",
   },
+  "BioAuth": {
+    "BioAuth": "Biometric Auth",
+    "CheckInput": "Enable BioAuth",
+  },
   "Error": {
     "Unknown": "Unknown Error",
     "Problem": "A problem has occurred",

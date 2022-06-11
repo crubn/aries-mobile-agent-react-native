@@ -3,6 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useTheme } from '../contexts/theme'
+import BioAuth from '../screens/BioAuth'
 import Language from '../screens/Language'
 import Settings from '../screens/Settings'
 import { Screens, SettingStackParams } from '../types/navigators'
@@ -18,6 +19,7 @@ const SettingStack: React.FC = () => {
     <Stack.Navigator screenOptions={{ ...defaultStackOptions }}>
       <Stack.Screen name={Screens.Settings} component={Settings} options={{ headerBackTitle: t('Global.Back') }} />
       <Stack.Screen name={Screens.Language} component={Language} />
+      <Stack.Screen name={Screens.BioAuth} component={BioAuth} />
     </Stack.Navigator>
   )
 }

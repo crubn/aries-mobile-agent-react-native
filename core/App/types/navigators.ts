@@ -18,6 +18,7 @@ export enum Screens {
   ProofRequestAttributeDetails = 'Proof Request Attribute Details',
   Settings = 'Settings',
   Language = 'Language',
+  BioAuth = 'BioAuth',
   Contacts = 'Contacts',
   ContactDetails = 'Contact Details',
   Chat = 'Chat',
