@@ -35,7 +35,9 @@ const translation = {
   },
   "BioAuth": {
     "BioAuth": "Biometric Auth",
-    "CheckInput": "Enable BioAuth",
+    "CheckInput": "Enable Biometric Auth",
+    "Failure": "Touch ID Auth failed",
+    "Cancelled": "Touch ID Auth cancelled",
   },
   "Error": {
     "Unknown": "Unknown Error",
