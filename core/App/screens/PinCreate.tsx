@@ -1,9 +1,11 @@
+import SingleSelectBlock from 'components/inputs/SingleSelectBlock'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Keyboard, StyleSheet, Text } from 'react-native'
+import { Alert, Keyboard, StyleSheet, Text } from 'react-native'
 import * as Keychain from 'react-native-keychain'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { CheckBoxRow } from '../components'
 import Button, { ButtonType } from '../components/buttons/Button'
 import PinInput from '../components/inputs/PinInput'
 import AlertModal from '../components/modals/AlertModal'
@@ -31,6 +33,7 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
     title: '',
     message: '',
   })
+  const [checked, setChecked] = useState(false)
   const [, dispatch] = useStore()
   const { t } = useTranslation()
 
@@ -108,6 +111,10 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
     }
   }
 
+  const handleCheckToggle = () => {
+    setChecked(!checked)
+  }
+
   return (
     <SafeAreaView style={[style.container]}>
       <Text style={[TextTheme.normal, { marginBottom: 16 }]}>
@@ -125,6 +132,13 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
         testID="ReenterPIN"
       />
 
+      <CheckBoxRow
+        title={t('BioAuth.CheckInput')}
+        accessibilityLabel={t('BioAuth.CheckInput')}
+        // testID={testIdWithKey('IAgree')}
+        checked={checked}
+        onPress={handleCheckToggle}
+      />
       <Button
         title={t('PinCreate.CreatePIN')}
         accessibilityLabel={t('PinCreate.CreatePIN')}

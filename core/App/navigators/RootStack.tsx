@@ -26,6 +26,8 @@ import Onboarding from '../screens/Onboarding'
 import { createCarouselStyle } from '../screens/OnboardingPages'
 import PinCreate from '../screens/PinCreate'
 import PinEnter from '../screens/PinEnter'
+import TouchIDAuth from '../screens/TouchIDAuth'
+import { isBioAuthEnabled } from '../services/bioAuth.service'
 import { StateFn } from '../types/fn'
 import { AuthenticateStackParams, Screens, Stacks } from '../types/navigators'
 
@@ -48,6 +50,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
   const navigation = useNavigation<StackNavigationProp<AuthenticateStackParams>>()
 
   const [authenticated, setAuthenticated] = useState(false)
+  const [bioAuthEnabled, setBioAuthEnabled] = useState(false)
   const [agentInitDone, setAgentInitDone] = useState(false)
   const [initAgentInProcess, setInitAgentInProcess] = useState(false)
 
@@ -118,6 +121,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
     if (authenticated && !agentInitDone) {
       initAgent()
     }
+    isBioAuthEnabled().then((enabled) => setBioAuthEnabled(enabled))
   }, [authenticated])
 
   const authStack = (setAuthenticated: StateFn) => {
@@ -125,9 +129,17 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
 
     return (
       <Stack.Navigator initialRouteName={Screens.Splash} screenOptions={{ ...defaultStackOptions, headerShown: false }}>
-        <Stack.Screen name={Screens.EnterPin}>
-          {(props) => <PinEnter {...props} setAuthenticated={setAuthenticated} />}
-        </Stack.Screen>
+        {bioAuthEnabled ? (
+          <Stack.Screen name={Screens.TouchIDAuth}>
+            {(props) => (
+              <TouchIDAuth {...props} setAuthenticated={setAuthenticated} setBioAuthEnabled={setBioAuthEnabled} />
+            )}
+          </Stack.Screen>
+        ) : (
+          <Stack.Screen name={Screens.EnterPin}>
+            {(props) => <PinEnter {...props} setAuthenticated={setAuthenticated} />}
+          </Stack.Screen>
+        )}
       </Stack.Navigator>
     )
   }

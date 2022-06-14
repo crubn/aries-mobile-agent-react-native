@@ -50,6 +50,16 @@ const Settings: React.FC<SettingsProps> = ({ navigation }) => {
             <Text style={SettingsTheme.text}>{t('Settings.Language')}</Text>
             <Icon name={'chevron-right'} size={25} color={SettingsTheme.iconColor} />
           </TouchableOpacity>
+          <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={t('Settings.Language')}
+            testID={testIdWithKey('Language')}
+            style={styles.row}
+            onPress={() => navigation.navigate(Screens.BioAuth)}
+          >
+            <Text style={SettingsTheme.text}>{t('BioAuth.BioAuth')}</Text>
+            <Icon name={'chevron-right'} size={25} color={SettingsTheme.iconColor} />
+          </TouchableOpacity>
         </View>
 
         <Text style={styles.groupHeader}>{t('Settings.AboutApp')}</Text>
