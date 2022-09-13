@@ -54,6 +54,7 @@ interface BrandColors {
   primaryBackground: string
   secondaryBackground: string
   link: string
+  splashBackground: string
 }
 
 interface SemanticColors {
@@ -121,6 +122,7 @@ const BrandColors: BrandColors = {
   modalPrimaryBackground: '#000000',
   modalSecondaryBackground: '#313132',
   link: '#FFFFFF',
+  splashBackground: '#202B67',
 }
 
 const SemanticColors: SemanticColors = {
@@ -572,7 +574,7 @@ const PinInputTheme = {
 export const Assets = {
   img: {
     logoPrimary: {
-      src: require('./assets/img/logo-large.png'),
+      src: require('./assets/img/crubn.png'),
       aspectRatio: 1,
       height: '33%',
       width: '33%',
