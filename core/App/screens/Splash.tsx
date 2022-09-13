@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useMemo } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { LocalStorageKeys } from '../constants'
@@ -12,8 +12,8 @@ import { useTheme } from '../contexts/theme'
 import { AuthenticateStackParams, Screens } from '../types/navigators'
 import {
   Onboarding as StoreOnboardingState,
-  Privacy as PrivacyState,
   Preferences as PreferencesState,
+  Privacy as PrivacyState
 } from '../types/state'
 
 const onboardingComplete = (state: StoreOnboardingState): boolean => {
@@ -51,7 +51,35 @@ const Splash: React.FC = () => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: ColorPallet.brand.primaryBackground,
+      backgroundColor: ColorPallet.brand.splashBackground,
+    },
+    row1: {
+      flex: 0.9,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    row2: {
+      flex: 0.1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    logo: {
+      height: 80,
+      width: 80,
+    },
+    walletName: {
+      color: 'white',
+      fontSize: 64,
+      marginTop: 10,
+      fontFamily: 'AvenirMedium',
+    },
+    poweredByImage: {
+      width: 150,
+      height: 100,
+      resizeMode: 'contain',
+    },
+    statusBar: {
+      color: ColorPallet.brand.splashBackground,
     },
   })
 
@@ -99,12 +127,26 @@ const Splash: React.FC = () => {
         // TODO:(am add error handling here)
       }
     }
-    init()
+    setTimeout(() => {
+      init()
+    }, 3000)
   }, [])
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={Assets.img.logoPrimary.src} style={{ resizeMode: Assets.img.logoPrimary.resizeMode }} />
+      <StatusBar backgroundColor={styles.statusBar.color} barStyle="light-content" />
+      <View style={styles.row1}>
+        <Image
+          source={{
+            uri: 'https://i.ibb.co/s2zRb6N/Vector.png',
+          }}
+          style={styles.logo}
+        />
+        <Text style={styles.walletName}>indisi</Text>
+      </View>
+      <View style={styles.row2}>
+        <Image source={{ uri: 'https://i.ibb.co/ZNGsTx9/Group-1780.png' }} style={styles.poweredByImage} />
+      </View>
     </SafeAreaView>
   )
 }

@@ -16,7 +16,8 @@
     "pre-commit-lint": "npx lint-staged",
     "setup": "cd .. && husky install .husky",
     "prepack": "bob build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "clear-cache": "cd .. && cd app && cd android && ./gradlew clean && cd .. && npm run android"
   },
   "peerDependencies": {
     "@aries-framework/core": "^0.2.0",
