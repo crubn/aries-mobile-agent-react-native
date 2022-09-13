@@ -5,7 +5,7 @@ import {
   HttpOutboundTransport,
   LogLevel,
   MediatorPickupStrategy,
-  WsOutboundTransport,
+  WsOutboundTransport
 } from '@aries-framework/core'
 import { agentDependencies } from '@aries-framework/react-native'
 import { useNavigation } from '@react-navigation/core'
@@ -33,11 +33,11 @@ import { WalletSecret } from '../types/security'
 
 import ConnectStack from './ConnectStack'
 import ContactStack from './ContactStack'
+import { createDefaultStackOptions } from './defaultStackOptions'
 import DeliveryStack from './DeliveryStack'
 import NotificationStack from './NotificationStack'
 import SettingStack from './SettingStack'
 import TabStack from './TabStack'
-import { createDefaultStackOptions } from './defaultStackOptions'
 
 interface RootStackProps {
   setAgent: React.Dispatch<React.SetStateAction<Agent | undefined>>
@@ -175,7 +175,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
           options={() => ({
             title: t('Screens.Onboarding'),
             headerTintColor: OnboardingTheme.headerTintColor,
-            headerShown: true,
+            headerShown: false,
             gestureEnabled: false,
             headerLeft: () => false,
           })}

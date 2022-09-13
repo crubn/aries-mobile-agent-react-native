@@ -67,7 +67,7 @@ const Splash: React.FC = () => {
       height: 80,
       width: 80,
     },
-    walletName: {
+    appName: {
       color: 'white',
       fontSize: 64,
       marginTop: 10,
@@ -129,7 +129,7 @@ const Splash: React.FC = () => {
     }
     setTimeout(() => {
       init()
-    }, 3000)
+    }, 1000)
   }, [])
 
   return (
@@ -142,7 +142,7 @@ const Splash: React.FC = () => {
           }}
           style={styles.logo}
         />
-        <Text style={styles.walletName}>indisi</Text>
+        <Text style={styles.appName}>indisi</Text>
       </View>
       <View style={styles.row2}>
         <Image source={{ uri: 'https://i.ibb.co/ZNGsTx9/Group-1780.png' }} style={styles.poweredByImage} />
