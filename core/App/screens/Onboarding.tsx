@@ -142,11 +142,11 @@ const Onboarding: React.FC<OnboardingProps> = ({ pages, nextButtonText, previous
         pages={pages}
         activeIndex={activeIndex}
         nextButtonText={nextButtonText}
-        previousButtonText={previousButtonText}
+        // previousButtonText={previousButtonText}
         scrollX={scrollX}
         style={style}
-        next={next}
-        previous={previous}
+        next={onSkipTouched}
+      // previous={previous}
       />
     </SafeAreaView>
   )

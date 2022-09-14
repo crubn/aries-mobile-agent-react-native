@@ -20,7 +20,7 @@ interface IPaginationProps {
   scrollX: Animated.Value
   next: () => void
   nextButtonText?: string
-  previous: () => void
+  previous?: () => void
   previousButtonText?: string
   style: IPaginationStyleSheet
 }
@@ -83,14 +83,21 @@ export const Pagination: React.FC<IPaginationProps> = ({
         accessibilityLabel={t('Global.Next')}
         testID={testIdWithKey('Next')}
         onPress={next}
+        style={{
+          marginTop: 50,
+          position: 'absolute',
+        }}
       >
         <Text
           style={[
             style.pagerNavigationButton,
-            { paddingLeft: 20, color: shouldHideNext() ? 'transparent' : style.pagerNavigationButton.color },
+            {
+              paddingLeft: 20,
+              color: style.pagerNavigationButton.color
+            },
           ]}
         >
-          {nextButtonText}
+          {shouldHideNext() ? 'Continue' : nextButtonText}
         </Text>
       </TouchableOpacity>
     </View>

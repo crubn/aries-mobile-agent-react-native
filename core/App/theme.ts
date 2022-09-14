@@ -112,7 +112,7 @@ export const zeroOpacity = 0.0
 export const borderWidth = 2
 
 const BrandColors: BrandColors = {
-  primary: '#42803E',
+  primary: '#202B67',
   primaryDisabled: `rgba(53, 130, 63, ${lightOpacity})`,
   secondary: '#FFFFFFFF',
   secondaryDisabled: `rgba(53, 130, 63, ${heavyOpacity})`,
@@ -530,7 +530,7 @@ export const OnboardingTheme = {
     color: ColorPallet.brand.primary,
   },
   pagerDotInactive: {
-    color: ColorPallet.brand.secondary,
+    color: '#DDDDDD',
   },
   pagerNavigationButton: {
     color: ColorPallet.brand.primary,
