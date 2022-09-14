@@ -1,3 +1,4 @@
+import styles from 'components/inputs/styles'
 import React, { useEffect, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Platform, StatusBar, Keyboard, StyleSheet, Text, Image, View } from 'react-native'
@@ -27,8 +28,33 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
   const style = StyleSheet.create({
     container: {
       backgroundColor: ColorPallet.brand.primaryBackground,
+      color: '#000',
+    },
+    logo: {
+      height: 40,
+      width: 40,
+      marginTop: 10,
+    },
+    appName: {
+      color: '#202B67',
+      fontSize: 35,
+      marginTop: 10,
+      fontFamily: 'AvenirMedium',
+      marginLeft: 20,
+    },
+    headerView: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 40,
+    },
+    headerText: {
+      fontFamily: 'AvenirMedium',
+      fontWeight: 'bold',
+      fontSize: 20,
+      color: '#444',
     },
   })
+
 
   useEffect(() => {
     if (!state.preferences.useBiometry) {
@@ -72,17 +98,13 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
         }
       />
       <View style={{ margin: 20 }}>
-        <Image
-          source={Assets.img.logoSecondary.src}
-          style={{
-            height: Assets.img.logoSecondary.height,
-            width: Assets.img.logoSecondary.width,
-            resizeMode: Assets.img.logoSecondary.resizeMode,
-            alignSelf: 'center',
-            marginBottom: 20,
-          }}
-        />
-        <Text style={[TextTheme.normal, { alignSelf: 'center', marginBottom: 16 }]}>{t('PinEnter.EnterPIN')}</Text>
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={style.logo} />
+          <Text style={style.appName}>indisi</Text>
+        </View>
+        <View style={style.headerView}>
+          <Text style={style.headerText}>{t('PinEnter.EnterPIN')}</Text>
+        </View>
         <PinInput
           onPinChanged={setPin}
           testID={testIdWithKey('EnterPIN')}
@@ -90,7 +112,7 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
           autoFocus={true}
         />
         <Button
-          title={t('Global.Enter')}
+          title={'Continue'}
           buttonType={ButtonType.Primary}
           testID={testIdWithKey('Enter')}
           accessibilityLabel={t('Global.Enter')}

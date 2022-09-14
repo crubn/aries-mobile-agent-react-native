@@ -190,7 +190,7 @@ export const TextTheme: TextTheme = {
   normal: {
     fontSize: 18,
     fontWeight: 'normal',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.black,
   },
   label: {
     fontSize: 14,

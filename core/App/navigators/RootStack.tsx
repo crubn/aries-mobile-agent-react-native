@@ -209,7 +209,7 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
           options={() => ({
             title: t('Screens.Biometry'),
             headerTintColor: OnboardingTheme.headerTintColor,
-            headerShown: true,
+            headerShown: false,
             headerLeft: () => false,
             rightLeft: () => false,
           })}

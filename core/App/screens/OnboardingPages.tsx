@@ -123,14 +123,6 @@ const guides: Array<{ image: string; title: string; body: string }> = [
   },
 ]
 
-const lastSlideData: Array<{ image: string; title: string; body: string }> = [
-  {
-    image: 'https://i.ibb.co/2hCsqSJ/Security-1.png',
-    title: 'Privacy at its core',
-    body: 'Keep your identity safe and protected from any exploits. Indisi wallet provide the safe space for all your credentials.',
-  },
-]
-
 const createPageWith = (image: string, title: string, body: string, OnboardingTheme: any) => {
   const styles = createStyles(OnboardingTheme)
   return (

@@ -42,6 +42,7 @@ const Button: React.FC<ButtonProps> = ({
       style={[
         buttonStyles[buttonType].color,
         disabled && (buttonType === ButtonType.Primary ? Buttons.primaryDisabled : Buttons.secondaryDisabled),
+        { borderRadius: 100 }
       ]}
       disabled={disabled}
       activeOpacity={heavyOpacity}
