@@ -1,9 +1,6 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { Image, StyleSheet, Text, View } from 'react-native'
 
-import SecureImage from '../assets/img/secure-image.svg'
-import Button, { ButtonType } from '../components/buttons/Button'
 import { GenericFn } from '../types/fn'
 import { testIdWithKey } from '../utils/testable'
 
@@ -33,15 +30,13 @@ export const createCarouselStyle = (OnboardingTheme: any): OnboardingStyleSheet 
     },
     pagerDot: {
       ...OnboardingTheme.pagerDot,
-      // borderWidth: 1,
-      // borderStyle: 'solid',
       borderRadius: 20,
       width: 20,
     },
     pagerDotActive: {
       ...OnboardingTheme.pagerDotActive,
       borderRadius: 0,
-      width: 10
+      width: 10,
     },
     pagerDotInactive: {
       ...OnboardingTheme.pagerDotInactive,
@@ -100,33 +95,6 @@ export const createStyles = (OnboardingTheme: any) => {
   })
 }
 
-const createImageDisplayOptions = (OnboardingTheme: any) => {
-  return {
-    // ...OnboardingTheme.imageDisplayOptions,
-    height: 100,
-    width: 100,
-  }
-}
-
-// const lastSlide = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
-//   const { t } = useTranslation()
-//   const styles = createStyles(OnboardingTheme)
-//   const imageDisplayOptions = createImageDisplayOptions(OnboardingTheme)
-//   return (
-//     <View style={{ backgroundColor: 'white' }}>
-//       <View style={{ marginTop: 'auto', marginBottom: 20, paddingHorizontal: 20 }}>
-//         <Button
-//           title={'Continue'}
-//           accessibilityLabel={t('Global.GetStarted')}
-//           testID={testIdWithKey('GetStarted')}
-//           onPress={onTutorialCompleted}
-//           buttonType={ButtonType.Primary}
-//         />
-//       </View>
-//     </View>
-//   )
-// }
-
 const guides: Array<{ image: string; title: string; body: string }> = [
   {
     image: 'https://i.ibb.co/M8DNVmC/Profile-Interface-1.png',
@@ -163,34 +131,6 @@ const lastSlideData: Array<{ image: string; title: string; body: string }> = [
   },
 ]
 
-// const lastSlide = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
-//   const styles = createStyles(OnboardingTheme)
-//   const data = lastSlideData[0]
-//   return (
-//     <View style={{ flex: 1, backgroundColor: 'white' }}>
-//       <View style={{ flexDirection: 'row', margin: 20 }}>
-//         <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={styles.logo} />
-//         <Text style={styles.appName}>indisi</Text>
-//       </View>
-//       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//         <View style={{ flex: 0.1 }}>
-//           <Text style={[styles.headerText, { fontSize: 20 }]} testID={testIdWithKey('HeaderText')}>
-//             {data.title}
-//           </Text>
-//         </View>
-//         <View style={{ flex: 0.5 }}>
-//           <Image source={{ uri: data.image }} style={{ height: 250, width: 250 }} resizeMode="contain" />
-//         </View>
-//         <View style={{ flex: 0.2, margin: 20 }}>
-//           <Text style={[styles.bodyText]} testID={testIdWithKey('BodyText')}>
-//             {data.body}
-//           </Text>
-//         </View>
-//       </View>
-//     </View>
-//   )
-// }
-
 const createPageWith = (image: string, title: string, body: string, OnboardingTheme: any) => {
   const styles = createStyles(OnboardingTheme)
   return (
@@ -219,10 +159,7 @@ const createPageWith = (image: string, title: string, body: string, OnboardingTh
 }
 
 const OnboardingPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any): Array<Element> => {
-  return [
-    ...guides.map((g) => createPageWith(g.image, g.title, g.body, OnboardingTheme)),
-    // lastSlide(onTutorialCompleted, OnboardingTheme),
-  ]
+  return [...guides.map((g) => createPageWith(g.image, g.title, g.body, OnboardingTheme))]
 }
 
 export default OnboardingPages
