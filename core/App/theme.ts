@@ -112,17 +112,17 @@ export const zeroOpacity = 0.0
 export const borderWidth = 2
 
 const BrandColors: BrandColors = {
-  primary: '#42803E',
+  primary: '#202B67',
   primaryDisabled: `rgba(53, 130, 63, ${lightOpacity})`,
   secondary: '#FFFFFFFF',
   secondaryDisabled: `rgba(53, 130, 63, ${heavyOpacity})`,
   highlight: '#FCBA19',
-  primaryBackground: '#000000',
+  primaryBackground: '#FFF',
   secondaryBackground: '#313132',
-  modalPrimaryBackground: '#000000',
+  modalPrimaryBackground: '#FFF',
   modalSecondaryBackground: '#313132',
   link: '#FFFFFF',
-  splashBackground: '#202B67',
+  splashBackground: '#202b66',
 }
 
 const SemanticColors: SemanticColors = {
@@ -139,7 +139,7 @@ const NotificationColors: NotificationColors = {
   info: '#313132',
   infoBorder: '#0099FF',
   infoIcon: '#0099FF',
-  infoText: '#FFFFFF',
+  infoText: '#444444',
   warn: '#313132',
   warnBorder: '#FCBA19',
   warnIcon: '#FCBA19',
@@ -190,7 +190,7 @@ export const TextTheme: TextTheme = {
   normal: {
     fontSize: 18,
     fontWeight: 'normal',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.black,
   },
   label: {
     fontSize: 14,
@@ -530,7 +530,7 @@ export const OnboardingTheme = {
     color: ColorPallet.brand.primary,
   },
   pagerDotInactive: {
-    color: ColorPallet.brand.secondary,
+    color: '#DDDDDD',
   },
   pagerNavigationButton: {
     color: ColorPallet.brand.primary,
@@ -540,14 +540,16 @@ export const OnboardingTheme = {
     color: ColorPallet.notification.infoText,
     fontSize: 32,
     fontWeight: 'bold',
+    fontFamily: 'AvenirMedium',
   },
   bodyText: {
     fontSize: 18,
     fontWeight: 'normal',
     color: ColorPallet.notification.infoText,
+    fontFamily: 'AvenirMedium',
   },
   imageDisplayOptions: {
-    fill: ColorPallet.notification.infoText,
+    // fill: ColorPallet.notification.infoText,
   },
 }
 

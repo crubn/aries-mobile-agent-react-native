@@ -1,12 +1,6 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { StyleSheet, Text, View } from 'react-native'
-import { SvgProps } from 'react-native-svg'
+import { Image, StyleSheet, Text, View } from 'react-native'
 
-import CredentialList from '../assets/img/credential-list.svg'
-import ScanShare from '../assets/img/scan-share.svg'
-import SecureImage from '../assets/img/secure-image.svg'
-import Button, { ButtonType } from '../components/buttons/Button'
 import { GenericFn } from '../types/fn'
 import { testIdWithKey } from '../utils/testable'
 
@@ -18,36 +12,47 @@ export const createCarouselStyle = (OnboardingTheme: any): OnboardingStyleSheet 
       ...OnboardingTheme.container,
       flex: 1,
       alignItems: 'center',
+      backgroundColor: 'white',
+      color: 'black',
+      fontFamily: 'AvenirMedium',
     },
     carouselContainer: {
       ...OnboardingTheme.carouselContainer,
       flexDirection: 'column',
+      backgroundColor: 'white',
     },
     pagerContainer: {
       flexShrink: 2,
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
-      marginBottom: 35,
+      marginBottom: 100,
+      backgroundColor: 'white',
     },
     pagerDot: {
       ...OnboardingTheme.pagerDot,
-      borderWidth: 1,
-      borderStyle: 'solid',
+      borderRadius: 20,
+      width: 20,
     },
     pagerDotActive: {
       ...OnboardingTheme.pagerDotActive,
+      borderRadius: 0,
+      width: 10,
     },
     pagerDotInactive: {
       ...OnboardingTheme.pagerDotInactive,
+      borderRadius: 20,
+      width: 20,
     },
     pagerPosition: {
-      position: 'relative',
-      top: 0,
+      // position: 'relative',
+      // top: 10,
+      marginTop: 100,
     },
     pagerNavigationButton: {
       ...OnboardingTheme.pagerNavigationButton,
       fontSize: 18,
       fontWeight: 'bold',
+      color: '#202B67',
     },
   })
 }
@@ -56,10 +61,13 @@ export const createStyles = (OnboardingTheme: any) => {
   return StyleSheet.create({
     headerText: {
       ...OnboardingTheme.headerText,
+      fontFamily: 'AvenirMedium',
     },
     bodyText: {
       ...OnboardingTheme.bodyText,
       flexShrink: 1,
+      fontFamily: 'AvenirMedium',
+      // fontSize: 15,
     },
     point: {
       flexDirection: 'row',
@@ -72,84 +80,78 @@ export const createStyles = (OnboardingTheme: any) => {
     icon: {
       marginRight: 10,
     },
+    logo: {
+      height: 40,
+      width: 40,
+      marginTop: 10,
+    },
+    appName: {
+      color: '#202B67',
+      fontSize: 35,
+      marginTop: 10,
+      fontFamily: 'AvenirMedium',
+      marginLeft: 20,
+    },
   })
 }
 
-const createImageDisplayOptions = (OnboardingTheme: any) => {
-  return {
-    ...OnboardingTheme.imageDisplayOptions,
-    height: 180,
-    width: 180,
-  }
-}
-
-const customPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
-  const { t } = useTranslation()
-  const styles = createStyles(OnboardingTheme)
-  const imageDisplayOptions = createImageDisplayOptions(OnboardingTheme)
-  return (
-    <>
-      <View style={{ alignItems: 'center' }}>
-        <SecureImage {...imageDisplayOptions} />
-      </View>
-      <View style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
-        <Text style={[styles.headerText, { fontSize: 18 }]} testID={testIdWithKey('HeaderText')}>
-          Ornare suspendisse sed nisi lacus
-        </Text>
-        <Text style={[styles.bodyText, { marginTop: 20 }]} testID={testIdWithKey('BodyText')}>
-          Enim facilisis gravida neque convallis a cras semper. Suscipit adipiscing bibendum est ultricies integer quis
-          auctor elit sed.
-        </Text>
-      </View>
-      <View style={{ marginTop: 'auto', marginBottom: 20, paddingHorizontal: 20 }}>
-        <Button
-          title={t('Global.GetStarted')}
-          accessibilityLabel={t('Global.GetStarted')}
-          testID={testIdWithKey('GetStarted')}
-          onPress={onTutorialCompleted}
-          buttonType={ButtonType.Primary}
-        />
-      </View>
-    </>
-  )
-}
-
-const guides: Array<{ image: React.FC<SvgProps>; title: string; body: string }> = [
+const guides: Array<{ image: string; title: string; body: string }> = [
   {
-    image: CredentialList,
-    title: 'Lorem ipsum dolor sit amet',
-    body: 'Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus.',
+    image: 'https://i.ibb.co/M8DNVmC/Profile-Interface-1.png',
+    title: 'Control your Identity',
+    body: 'Take control of your identity and define the way you want it to be used.',
   },
   {
-    image: ScanShare,
-    title: 'Excepteur sint occaecat ',
-    body: 'Mollis aliquam ut porttitor leo a diam sollicitudin tempor.',
+    image: 'https://i.ibb.co/9nCmdDx/Mobile-payments-1.png',
+    title: 'Scan to Connect',
+    body: 'Quickly connect with other organizations and users to exchange information. Simply Scan the QR code to continue',
+  },
+  {
+    image: 'https://i.ibb.co/pdFXr0W/Plain-credit-card-1.png',
+    title: 'Secure Wallet',
+    body: 'Completely own your credentials by saving them securely on your phone.',
+  },
+  {
+    image: 'https://i.ibb.co/D90Sw5H/Verified-1.png',
+    title: 'Instant Verification',
+    body: 'Prove your identity to Organizations by sharing only the necessary information. Simple and Hassle-free.',
+  },
+  {
+    image: 'https://i.ibb.co/2hCsqSJ/Security-1.png',
+    title: 'Privacy at its core',
+    body: 'Keep your identity safe and protected from any exploits. Indisi wallet provide the safe space for all your credentials.',
   },
 ]
 
-const createPageWith = (image: React.FC<SvgProps>, title: string, body: string, OnboardingTheme: any) => {
+const createPageWith = (image: string, title: string, body: string, OnboardingTheme: any) => {
   const styles = createStyles(OnboardingTheme)
-  const imageDisplayOptions = createImageDisplayOptions(OnboardingTheme)
   return (
-    <>
-      <View style={{ alignItems: 'center' }}>{image(imageDisplayOptions)}</View>
-      <View style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
-        <Text style={[styles.headerText, { fontSize: 18 }]} testID={testIdWithKey('HeaderText')}>
-          {title}
-        </Text>
-        <Text style={[styles.bodyText, { marginTop: 20 }]} testID={testIdWithKey('BodyText')}>
-          {body}
-        </Text>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ flexDirection: 'row', margin: 20 }}>
+        <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={styles.logo} />
+        <Text style={styles.appName}>indisi</Text>
       </View>
-    </>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 0.1 }}>
+          <Text style={[styles.headerText, { fontSize: 20 }]} testID={testIdWithKey('HeaderText')}>
+            {title}
+          </Text>
+        </View>
+        <View style={{ flex: 0.5 }}>
+          <Image source={{ uri: image }} style={{ height: 250, width: 250 }} resizeMode="contain" />
+        </View>
+        <View style={{ flex: 0.2, margin: 20 }}>
+          <Text style={[styles.bodyText]} testID={testIdWithKey('BodyText')}>
+            {body}
+          </Text>
+        </View>
+      </View>
+    </View>
   )
 }
 
 const OnboardingPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any): Array<Element> => {
-  return [
-    ...guides.map((g) => createPageWith(g.image, g.title, g.body, OnboardingTheme)),
-    customPages(onTutorialCompleted, OnboardingTheme),
-  ]
+  return [...guides.map((g) => createPageWith(g.image, g.title, g.body, OnboardingTheme))]
 }
 
 export default OnboardingPages

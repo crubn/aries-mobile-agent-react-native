@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Platform, Keyboard, StyleSheet, Text, StatusBar } from 'react-native'
+import { Platform, Keyboard, StyleSheet, Text, StatusBar, View, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Button, { ButtonType } from '../components/buttons/Button'
@@ -45,6 +45,29 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
     container: {
       backgroundColor: ColorPallet.brand.primaryBackground,
       margin: 20,
+    },
+    logo: {
+      height: 40,
+      width: 40,
+      marginTop: 10,
+    },
+    appName: {
+      color: '#202B67',
+      fontSize: 35,
+      marginTop: 10,
+      fontFamily: 'AvenirMedium',
+      marginLeft: 20,
+    },
+    passcodeView: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 40,
+    },
+    passcodeCreateText: {
+      fontFamily: 'AvenirMedium',
+      fontWeight: 'bold',
+      fontSize: 18,
+      color: '#444',
     },
   })
 
@@ -120,17 +143,26 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
           Platform.OS === 'android' ? StatusBarStyles.Light : statusBarStyleForColor(style.container.backgroundColor)
         }
       />
-      <Text style={[TextTheme.normal, { marginBottom: 16 }]}>
+      {/* <Text style={[TextTheme.normal, { marginBottom: 16 }]}>
         <Text style={{ fontWeight: 'bold' }}>{t('PinCreate.RememberPIN')}</Text> {t('PinCreate.PINDisclaimer')}
-      </Text>
-      <PinInput
-        label={t('PinCreate.EnterPINTitle')}
-        onPinChanged={setPin}
-        testID={testIdWithKey('EnterPIN')}
-        accessibilityLabel={t('PinCreate.EnterPIN')}
-        autoFocus={true}
-      />
-      <PinInput
+      </Text> */}
+      <View style={{ flexDirection: 'row', margin: 20 }}>
+        <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={style.logo} />
+        <Text style={style.appName}>indisi</Text>
+      </View>
+      <View style={style.passcodeView}>
+        <Text style={style.passcodeCreateText}>Create Passcode</Text>
+      </View>
+      <View style={{ marginTop: 50 }}>
+        <PinInput
+          label={t('PinCreate.EnterPINTitle')}
+          onPinChanged={setPin}
+          testID={testIdWithKey('EnterPIN')}
+          accessibilityLabel={t('PinCreate.EnterPIN')}
+          autoFocus={true}
+        />
+      </View>
+      {/* <PinInput
         label={t('PinCreate.ReenterPIN')}
         onPinChanged={(p: string) => {
           setPinTwo(p)
@@ -140,18 +172,9 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
         }}
         testID={testIdWithKey('ReenterPIN')}
         accessibilityLabel={t('PinCreate.ReenterPIN')}
-      />
+      /> */}
 
-      <Button
-        title={t('PinCreate.CreatePIN')}
-        testID={testIdWithKey('CreatePIN')}
-        accessibilityLabel={t('PinCreate.CreatePIN')}
-        buttonType={ButtonType.Primary}
-        onPress={async () => {
-          Keyboard.dismiss()
-          await confirmEntry(pin, pinTwo)
-        }}
-      />
+
       {modalState.visible && (
         <AlertModal
           title={modalState.title}
@@ -159,6 +182,18 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
           submit={() => setModalState({ ...modalState, visible: false })}
         />
       )}
+      <View>
+        <Button
+          title={t('PinCreate.CreatePIN')}
+          testID={testIdWithKey('CreatePIN')}
+          accessibilityLabel={t('PinCreate.CreatePIN')}
+          buttonType={ButtonType.Primary}
+          onPress={async () => {
+            Keyboard.dismiss()
+            await confirmEntry(pin, pin)
+          }}
+        />
+      </View>
     </SafeAreaView>
   )
 }

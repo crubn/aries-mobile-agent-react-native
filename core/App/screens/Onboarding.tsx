@@ -1,17 +1,15 @@
 import { useNavigation } from '@react-navigation/core'
 import { useFocusEffect } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import React, { Ref, useCallback, useEffect, useRef, useState } from 'react'
+import React, { Ref, useCallback, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Animated, BackHandler, Dimensions, FlatList, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import HeaderRight from '../components/buttons/HeaderRightSkip'
 import { Pagination } from '../components/misc/Pagination'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
 import { AuthenticateStackParams, Screens } from '../types/navigators'
-import { testIdWithKey } from '../utils/testable'
 
 const { width } = Dimensions.get('window')
 
@@ -92,24 +90,24 @@ const Onboarding: React.FC<OnboardingProps> = ({ pages, nextButtonText, previous
     navigation.navigate(Screens.Terms)
   }
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <HeaderRight
-          title={t('Global.Skip')}
-          accessibilityLabel={t('Global.Skip')}
-          testID={testIdWithKey('Skip')}
-          onPress={onSkipTouched}
-        />
-      ),
-    })
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  //       <HeaderRight
+  //         title={t('Global.Skip')}
+  //         accessibilityLabel={t('Global.Skip')}
+  //         testID={testIdWithKey('Skip')}
+  //         onPress={onSkipTouched}
+  //       />
+  //     ),
+  //   })
 
-    if (activeIndex + 1 === pages.length) {
-      navigation.setOptions({
-        headerRight: () => false,
-      })
-    }
-  }, [activeIndex])
+  //   if (activeIndex + 1 === pages.length) {
+  //     navigation.setOptions({
+  //       headerRight: () => false,
+  //     })
+  //   }
+  // }, [activeIndex])
 
   useFocusEffect(
     useCallback(() => {
@@ -144,11 +142,11 @@ const Onboarding: React.FC<OnboardingProps> = ({ pages, nextButtonText, previous
         pages={pages}
         activeIndex={activeIndex}
         nextButtonText={nextButtonText}
-        previousButtonText={previousButtonText}
+        // previousButtonText={previousButtonText}
         scrollX={scrollX}
         style={style}
-        next={next}
-        previous={previous}
+        next={onSkipTouched}
+      // previous={previous}
       />
     </SafeAreaView>
   )
