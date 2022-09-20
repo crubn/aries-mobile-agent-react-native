@@ -540,13 +540,13 @@ export const OnboardingTheme = {
     color: ColorPallet.notification.infoText,
     fontSize: 32,
     fontWeight: 'bold',
-    fontFamily: 'AvenirMedium',
+    fontFamily: 'Avenir-Medium',
   },
   bodyText: {
     fontSize: 18,
     fontWeight: 'normal',
     color: ColorPallet.notification.infoText,
-    fontFamily: 'AvenirMedium',
+    fontFamily: 'Avenir-Medium',
   },
   imageDisplayOptions: {
     // fill: ColorPallet.notification.infoText,

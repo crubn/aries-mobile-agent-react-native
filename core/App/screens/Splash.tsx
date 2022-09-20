@@ -71,7 +71,7 @@ const Splash: React.FC = () => {
       color: 'white',
       fontSize: 64,
       marginTop: 10,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
     },
     poweredByImage: {
       width: 150,

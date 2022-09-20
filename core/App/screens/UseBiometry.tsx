@@ -42,7 +42,7 @@ const UseBiometry: React.FC = () => {
       color: '#202B67',
       fontSize: 35,
       marginTop: 10,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       marginLeft: 20,
     },
     headerView: {
@@ -56,13 +56,13 @@ const UseBiometry: React.FC = () => {
       marginTop: 0,
     },
     headerText: {
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       fontWeight: 'bold',
       fontSize: 20,
       color: '#444',
     },
     descriptionText: {
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       fontSize: 18,
       color: '#444',
     },
@@ -73,7 +73,7 @@ const UseBiometry: React.FC = () => {
     },
     laterText: {
       color: '#666',
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       fontWeight: 'bold',
       marginTop: 50,
       textAlign: 'center',
