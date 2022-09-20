@@ -14,7 +14,7 @@ export const createCarouselStyle = (OnboardingTheme: any): OnboardingStyleSheet 
       alignItems: 'center',
       backgroundColor: 'white',
       color: 'black',
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
     },
     carouselContainer: {
       ...OnboardingTheme.carouselContainer,
@@ -61,12 +61,12 @@ export const createStyles = (OnboardingTheme: any) => {
   return StyleSheet.create({
     headerText: {
       ...OnboardingTheme.headerText,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
     },
     bodyText: {
       ...OnboardingTheme.bodyText,
       flexShrink: 1,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       // fontSize: 15,
     },
     point: {
@@ -89,7 +89,7 @@ export const createStyles = (OnboardingTheme: any) => {
       color: '#202B67',
       fontSize: 35,
       marginTop: 10,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       marginLeft: 20,
     },
   })

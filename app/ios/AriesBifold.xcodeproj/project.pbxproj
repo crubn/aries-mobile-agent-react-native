@@ -10,6 +10,7 @@
 		00E356F31AD99517003FC87E /* AriesBifoldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AriesBifoldTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1886637528D8A6FF00B4AA21 /* Avenir-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1886637428D8A6FF00B4AA21 /* Avenir-Medium.ttf */; };
 		33D4F52D89D299BE528C3520 /* libPods-AriesBifold.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E31DDF0185498B58541BF97 /* libPods-AriesBifold.a */; };
 		433E773E26557E1B00F569EE /* Indy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E773D26557E1B00F569EE /* Indy.framework */; };
 		433E773F26557E1B00F569EE /* Indy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 433E773D26557E1B00F569EE /* Indy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -53,6 +54,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AriesBifold/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AriesBifold/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AriesBifold/main.m; sourceTree = "<group>"; };
+		1886637228D8A3E300B4AA21 /* Avenir-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Avenir-Medium.ttf; path = "../../../../Downloads/Avenir Medium/Avenir-Medium.ttf"; sourceTree = "<group>"; };
+		1886637428D8A6FF00B4AA21 /* Avenir-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir-Medium.ttf"; path = "../../../../Downloads/Avenir Medium/Avenir-Medium.ttf"; sourceTree = "<group>"; };
 		195156FF966449B59DC903DA /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		25572EB141C34E77B402AAB3 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		28215836744C42E2B2C3E89C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1886637428D8A6FF00B4AA21 /* Avenir-Medium.ttf */,
+				1886637228D8A3E300B4AA21 /* Avenir-Medium.ttf */,
 				566FB1F1273B158E003E9BEE /* Media.xcassets */,
 				13B07FAE1A68108700A75B9A /* AriesBifold */,
 				00E356EF1AD99517003FC87E /* AriesBifoldTests */,
@@ -247,6 +252,7 @@
 				F5B7D67D9BBF4C5FE692BB29 /* [CP] Embed Pods Frameworks */,
 				EB396EB204E0E4C9F6307F29 /* [CP] Copy Pods Resources */,
 				433E774026557E1B00F569EE /* Embed Frameworks */,
+				1886637128D8A37A00B4AA21 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -298,6 +304,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1886637128D8A37A00B4AA21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1886637528D8A6FF00B4AA21 /* Avenir-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

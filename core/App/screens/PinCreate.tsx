@@ -55,7 +55,7 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
       color: '#202B67',
       fontSize: 35,
       marginTop: 10,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       marginLeft: 20,
     },
     passcodeView: {
@@ -64,7 +64,7 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
       marginTop: 40,
     },
     passcodeCreateText: {
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       fontWeight: 'bold',
       fontSize: 18,
       color: '#444',

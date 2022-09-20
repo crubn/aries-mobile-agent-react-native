@@ -39,7 +39,7 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
       color: '#202B67',
       fontSize: 35,
       marginTop: 10,
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       marginLeft: 20,
     },
     headerView: {
@@ -48,7 +48,7 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
       marginTop: 40,
     },
     headerText: {
-      fontFamily: 'AvenirMedium',
+      fontFamily: 'Avenir-Medium',
       fontWeight: 'bold',
       fontSize: 20,
       color: '#444',
