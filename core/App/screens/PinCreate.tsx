@@ -16,6 +16,7 @@ import { useTheme } from '../contexts/theme'
 import { AuthenticateStackParams, Screens } from '../types/navigators'
 import { statusBarStyleForColor, StatusBarStyles } from '../utils/luminance'
 import { testIdWithKey } from '../utils/testable'
+import IndisiLogo from '../assets/img/indisi-logo-yellow-blue.svg'
 
 interface PinCreateProps {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
@@ -81,7 +82,7 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
         type: DispatchAction.DID_CREATE_PIN,
       })
 
-      navigation.navigate(Screens.UseBiometry)
+      navigation.navigate(Screens.PersonalDetails)
     } catch (e) {
       // TODO:(jl)
     }
@@ -138,16 +139,10 @@ const PinCreate: React.FC<PinCreateProps> = ({ setAuthenticated }) => {
 
   return (
     <SafeAreaView style={[style.container]}>
-      <StatusBar
-        barStyle={
-          Platform.OS === 'android' ? StatusBarStyles.Light : statusBarStyleForColor(style.container.backgroundColor)
-        }
-      />
-      {/* <Text style={[TextTheme.normal, { marginBottom: 16 }]}>
-        <Text style={{ fontWeight: 'bold' }}>{t('PinCreate.RememberPIN')}</Text> {t('PinCreate.PINDisclaimer')}
-      </Text> */}
-      <View style={{ flexDirection: 'row', margin: 20 }}>
-        <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={style.logo} />
+      <View style={{ flexDirection: 'row', margin: 20, alignItems: 'center', display: 'flex' }}>
+        <View style={{ marginTop: 15 }}>
+          <IndisiLogo />
+        </View>
         <Text style={style.appName}>indisi</Text>
       </View>
       <View style={style.passcodeView}>

@@ -3,15 +3,16 @@ import { Theme } from '../theme'
 export function createDefaultStackOptions({ ColorPallet, TextTheme }: Theme) {
   return {
     headerTintColor: ColorPallet.grayscale.white,
-    headerShown: true,
+    headerShown: false,
     headerBackTitleVisible: true,
     headerStyle: {
-      elevation: 0,
-      shadowOffset: { width: 0, height: 6 },
-      shadowRadius: 6,
+      // elevation: 0,
+      // shadowOffset: { width: 0, height: 6 },
+      // shadowRadius: 6,
       shadowColor: ColorPallet.grayscale.black,
-      shadowOpacity: 0.15,
-      borderBottomWidth: 0,
+      shadowOpacity: 0,
+      // borderBottomWidth: 0,
+      backgroundColor: 'white',
     },
     headerTitleStyle: {
       ...TextTheme.title,

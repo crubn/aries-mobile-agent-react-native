@@ -17,6 +17,7 @@ import { AuthProvider } from './contexts/auth'
 import { NetworkProvider } from './contexts/network'
 import RootStack from './navigators/RootStack'
 import OnboardingPages from './screens/OnboardingPages'
+import PersonalDetails from './screens/PersonalDetails'
 import Splash from './screens/Splash'
 import Terms from './screens/Terms'
 import UseBiometry from './screens/UseBiometry'
@@ -63,6 +64,7 @@ export {
   OnboardingPages,
   Splash,
   Terms,
+  PersonalDetails,
   HomeContentView,
   UseBiometry,
 }

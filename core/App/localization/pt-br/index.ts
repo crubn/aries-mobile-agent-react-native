@@ -143,8 +143,8 @@ const translation = {
     "RemoveTitle": "Remover a credencial da sua carteira",
     "RemoveCaption": "Você perderá a habilidade de prover as informações desta credencial com essa carteira.",
     "CredentialNotFound": "Credencial não encontrada",
-    "YouWillNotLose": "Você NÃO perderá",    
-    "YouWillNotLoseListItem1": "Sua credencial dentro do sistema que lhe emitiu sua credencial.", 
+    "YouWillNotLose": "Você NÃO perderá",
+    "YouWillNotLoseListItem1": "Sua credencial dentro do sistema que lhe emitiu sua credencial.",
     "YouWillNotLoseListItem2": "A organização emissora como um Contato.",
     "HowToGetThisCredentialBack": "Como ter essa credencial de volta",
     "HowToGetThisCredentialBackListItem1": "Você terá que ir à organização que lhe emitiu essa credencial e requisita-la novamente.",
@@ -190,7 +190,7 @@ const translation = {
     "SettingsInstruction": "Você sempre pode remover contatos a qualquer momento em ",
     "PrivacyMessage": "O uso de suas credenciais nunca é compartilhado com seus contatos.",
     "PopupExit": "Entendi"
-},
+  },
   "CredentialOffer": {
     "CredentialOffer": "Oferta de Credencial",
     "ThisIsTakingLongerThanExpected": "Isso está demorando mais que o normal. Verifique novamente mais tarde sua nova credencial.",
@@ -288,7 +288,8 @@ const translation = {
     "Contacts": 'Contatos',
     "Decline": "Recusar",
     "ContactDetails": 'Detalhes do Contato',
-    "Biometry": "Biometria"
+    "Biometry": "Biometria",
+    "PersonalDetails": "Personal Details"
   },
   "Loading": {
     "TakingTooLong": "Isso esta demorando mais que o normal. Você pode voltar para a home ou continuar esperando.",

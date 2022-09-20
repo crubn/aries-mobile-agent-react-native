@@ -1,7 +1,7 @@
 import styles from 'components/inputs/styles'
 import React, { useEffect, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Platform, StatusBar, Keyboard, StyleSheet, Text, Image, View } from 'react-native'
+import { Platform, StatusBar, Keyboard, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Button, { ButtonType } from '../components/buttons/Button'
@@ -12,6 +12,7 @@ import { StoreContext } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import { statusBarStyleForColor, StatusBarStyles } from '../utils/luminance'
 import { testIdWithKey } from '../utils/testable'
+import IndisiLogo from '../assets/img/indisi-logo-yellow-blue.svg'
 
 interface PinEnterProps {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,6 +25,7 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const { ColorPallet, TextTheme, Assets } = useTheme()
   const [state] = useContext(StoreContext)
+  const [text, setText] = React.useState("");
 
   const style = StyleSheet.create({
     container: {
@@ -92,14 +94,11 @@ const PinEnter: React.FC<PinEnterProps> = ({ setAuthenticated }) => {
 
   return (
     <SafeAreaView style={[style.container]}>
-      <StatusBar
-        barStyle={
-          Platform.OS === 'android' ? StatusBarStyles.Light : statusBarStyleForColor(style.container.backgroundColor)
-        }
-      />
       <View style={{ margin: 20 }}>
-        <View style={{ flexDirection: 'row', marginTop: 20 }}>
-          <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={style.logo} />
+        <View style={{ flexDirection: 'row', margin: 20, alignItems: 'center', display: 'flex' }}>
+          <View style={{ marginTop: 15 }}>
+            <IndisiLogo />
+          </View>
           <Text style={style.appName}>indisi</Text>
         </View>
         <View style={style.headerView}>

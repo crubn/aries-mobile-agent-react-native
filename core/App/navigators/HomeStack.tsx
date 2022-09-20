@@ -8,6 +8,7 @@ import Home from '../screens/Home'
 import ListNotifications from '../screens/ListNotifications'
 import WebDisplay from '../screens/WebDisplay'
 import { HomeStackParams, Screens } from '../types/navigators'
+import IndisiLogo from '../assets/img/indisi-logo-yellow-blue.svg'
 
 import { createDefaultStackOptions } from './defaultStackOptions'
 
@@ -24,6 +25,7 @@ const HomeStack: React.FC = () => {
         component={Home}
         options={() => ({
           title: t('Screens.Home'),
+          headerLeft: () => <IndisiLogo />,
           headerRight: () => <SettingsCog />,
         })}
       />

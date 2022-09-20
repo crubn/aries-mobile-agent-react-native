@@ -187,7 +187,7 @@ const translation = {
     "SettingsInstruction": "You can always remove contacts at anytime in ",
     "PrivacyMessage": "Use of your credentials is never shared with your contacts.",
     "PopupExit": "Got it"
-},
+  },
   "CredentialOffer": {
     "CredentialOffer": "Credential Offer",
     "ThisIsTakingLongerThanExpected": "This is taking Longer than expected. Check back later for your new credential.",
@@ -285,7 +285,8 @@ const translation = {
     "Contacts": 'Contacts',
     "Decline": "Decline",
     "ContactDetails": 'Contact Details',
-    "Biometry": "Biometrics"
+    "Biometry": "Biometrics",
+    "PersonalDetails": "Personal Details"
   },
   "Loading": {
     "TakingTooLong": "This is taking longer than usual. You can return to home or continue waiting.",

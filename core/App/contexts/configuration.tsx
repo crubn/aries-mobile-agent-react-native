@@ -7,6 +7,7 @@ export interface ConfigurationContext {
   pages: typeof OnboardingPages
   splash: React.FC
   terms: React.FC
+  personalDetails: React.FC
   homeContentView: React.FC
   OCABundle: Record<string, Overlay>
   useBiometry: React.FC

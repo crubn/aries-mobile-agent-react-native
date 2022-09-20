@@ -10,6 +10,9 @@ import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import { AuthenticateStackParams, Screens } from '../types/navigators'
+import IndisiLogo from '../assets/img/indisi-logo-splash-screen.svg'
+// import PoweredByCrubn from '../assets/img/powered-by-crubn.svg'
+
 import {
   Onboarding as StoreOnboardingState,
   Preferences as PreferencesState,
@@ -59,9 +62,9 @@ const Splash: React.FC = () => {
       alignItems: 'center',
     },
     row2: {
-      flex: 0.1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      // flex: 0.2,
+      // justifyContent: 'center',
+      // alignItems: 'center',
     },
     logo: {
       height: 80,
@@ -129,24 +132,26 @@ const Splash: React.FC = () => {
     }
     setTimeout(() => {
       init()
-    }, 1000)
+    }, 2000)
   }, [])
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={styles.statusBar.color} barStyle="light-content" />
       <View style={styles.row1}>
-        <Image
+        {/* <Image
           source={{
             uri: 'https://i.ibb.co/s2zRb6N/Vector.png',
           }}
           style={styles.logo}
-        />
+        /> */}
+        <IndisiLogo />
         <Text style={styles.appName}>indisi</Text>
       </View>
-      <View style={styles.row2}>
-        <Image source={{ uri: 'https://i.ibb.co/ZNGsTx9/Group-1780.png' }} style={styles.poweredByImage} />
-      </View>
+      {/* <View style={styles.row2}> */}
+      <Image source={{ uri: 'https://i.ibb.co/ZNGsTx9/Group-1780.png' }} style={styles.poweredByImage} />
+      {/* <PoweredByCrubn style={{ width: "100px" }} /> */}
+      {/* </View> */}
     </SafeAreaView>
   )
 }

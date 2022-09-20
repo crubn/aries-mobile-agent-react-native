@@ -75,11 +75,6 @@ const ProofRequestAccept: React.FC<ProofRequestAcceptProps> = ({ visible, proofI
 
   return (
     <Modal visible={visible} transparent={true} animationType={'none'}>
-      <StatusBar
-        barStyle={
-          Platform.OS === 'android' ? StatusBarStyles.Light : statusBarStyleForColor(styles.container.backgroundColor)
-        }
-      />
       <SafeAreaView style={[styles.container]}>
         <View style={[styles.messageContainer]}>
           {proofDeliveryStatus === ProofState.RequestReceived && (

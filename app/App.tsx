@@ -18,6 +18,7 @@ import {
   OnboardingPages,
   Splash,
   Terms,
+  PersonalDetails,
   HomeContentView,
   UseBiometry,
 } from "aries-bifold";
@@ -30,6 +31,7 @@ const defaultConfiguration: ConfigurationContext = {
   pages: OnboardingPages,
   splash: Splash,
   terms: Terms,
+  personalDetails: PersonalDetails,
   homeContentView: HomeContentView,
   OCABundle: {},
   useBiometry: UseBiometry,
@@ -54,12 +56,7 @@ const App = () => {
           <ConfigurationProvider value={defaultConfiguration}>
             <AuthProvider>
               <NetworkProvider>
-                <StatusBar
-                  hidden={false}
-                  barStyle="light-content"
-                  backgroundColor={theme.ColorPallet.brand.primary}
-                  translucent={false}
-                />
+                <StatusBar backgroundColor={'#FFF'} barStyle={'dark-content'} />
                 <NetInfo />
                 <ErrorModal />
                 <RootStack setAgent={setAgent} />

@@ -27,6 +27,7 @@ export enum Screens {
   Declined = 'Declined',
   CommonDecline = 'Common Decline',
   UseBiometry = 'Use Biometry',
+  PersonalDetails = 'Personal Details',
 }
 
 export enum Stacks {

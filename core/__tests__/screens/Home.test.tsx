@@ -28,6 +28,7 @@ const defaultConfiguration: ConfigurationContext = {
   pages: undefined,
   splash: undefined,
   terms: undefined,
+  personalDetails: undefined,
   homeContentView: HomeContentView,
 }
 

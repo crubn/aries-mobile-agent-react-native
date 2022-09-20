@@ -5,7 +5,7 @@ import {
   HttpOutboundTransport,
   LogLevel,
   MediatorPickupStrategy,
-  WsOutboundTransport
+  WsOutboundTransport,
 } from '@aries-framework/core'
 import { agentDependencies } from '@aries-framework/react-native'
 import { useNavigation } from '@react-navigation/core'
@@ -25,6 +25,7 @@ import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import Onboarding from '../screens/Onboarding'
 import { createCarouselStyle } from '../screens/OnboardingPages'
+import PersonalDetails from '../screens/PersonalDetails'
 import PinCreate from '../screens/PinCreate'
 import PinEnter from '../screens/PinEnter'
 import { StateFn } from '../types/fn'
@@ -33,11 +34,11 @@ import { WalletSecret } from '../types/security'
 
 import ConnectStack from './ConnectStack'
 import ContactStack from './ContactStack'
-import { createDefaultStackOptions } from './defaultStackOptions'
 import DeliveryStack from './DeliveryStack'
 import NotificationStack from './NotificationStack'
 import SettingStack from './SettingStack'
 import TabStack from './TabStack'
+import { createDefaultStackOptions } from './defaultStackOptions'
 
 interface RootStackProps {
   setAgent: React.Dispatch<React.SetStateAction<Agent | undefined>>
@@ -168,7 +169,8 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
     const Stack = createStackNavigator()
     const carousel = createCarouselStyle(OnboardingTheme)
     return (
-      <Stack.Navigator initialRouteName={Screens.Splash} screenOptions={{ ...defaultStackOptions, headerShown: false }}>
+      <Stack.Navigator
+        initialRouteName={Screens.Splash} screenOptions={{ ...defaultStackOptions, headerShown: false }}>
         <Stack.Screen name={Screens.Splash} component={splash} />
         <Stack.Screen
           name={Screens.Onboarding}
@@ -191,11 +193,22 @@ const RootStack: React.FC<RootStackProps> = (props: RootStackProps) => {
           )}
         </Stack.Screen>
         <Stack.Screen
+          name={Screens.PersonalDetails}
+          options={() => ({
+            title: t('Screens.PersonalDetails'),
+            headerTintColor: OnboardingTheme.headerTintColor,
+            headerShown: false,
+            headerLeft: () => false,
+            rightLeft: () => false,
+          })}
+          component={PersonalDetails}
+        />
+        <Stack.Screen
           name={Screens.Terms}
           options={() => ({
             title: t('Screens.Terms'),
             headerTintColor: OnboardingTheme.headerTintColor,
-            headerShown: true,
+            headerShown: false,
             headerLeft: () => false,
             rightLeft: () => false,
           })}

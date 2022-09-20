@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
       style={[
         buttonStyles[buttonType].color,
         disabled && (buttonType === ButtonType.Primary ? Buttons.primaryDisabled : Buttons.secondaryDisabled),
-        { borderRadius: 100 }
+        { borderRadius: 100, minWidth: 150 },
       ]}
       disabled={disabled}
       activeOpacity={heavyOpacity}
@@ -51,6 +51,7 @@ const Button: React.FC<ButtonProps> = ({
         style={[
           buttonStyles[buttonType].text,
           disabled && (buttonType === ButtonType.Primary ? Buttons.primaryTextDisabled : Buttons.secondaryTextDisabled),
+          { fontSize: 15 },
         ]}
       >
         {title}

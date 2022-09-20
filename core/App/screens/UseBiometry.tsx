@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, View, Switch, StatusBar, Platform, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
-import Biometrics from '../assets/img/biometrics.svg'
+import IndisiLogo from '../assets/img/indisi-logo-yellow-blue.svg'
 import Button, { ButtonType } from '../components/buttons/Button'
 import { useAuth } from '../contexts/auth'
 import { DispatchAction } from '../contexts/reducers/store'
@@ -63,7 +62,7 @@ const UseBiometry: React.FC = () => {
     },
     descriptionText: {
       fontFamily: 'Avenir-Medium',
-      fontSize: 18,
+      fontSize: 17,
       color: '#444',
     },
     biometry: {
@@ -77,7 +76,7 @@ const UseBiometry: React.FC = () => {
       fontWeight: 'bold',
       marginTop: 50,
       textAlign: 'center',
-      fontSize: 18,
+      fontSize: 15,
     },
   })
 
@@ -88,7 +87,7 @@ const UseBiometry: React.FC = () => {
   }, [])
 
   const continueTouched = async () => {
-    console.warn("called")
+    console.warn('called')
     setContinueEnabled(false)
 
     if (biometryEnabled) {
@@ -105,11 +104,10 @@ const UseBiometry: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle={Platform.OS === 'android' ? StatusBarStyles.Light : statusBarStyleForColor(ColorPallet.brand.primary)}
-      />
-      <View style={{ flexDirection: 'row', margin: 20 }}>
-        <Image source={{ uri: 'https://i.ibb.co/pn8r7YP/Group-1690.png' }} style={styles.logo} />
+      <View style={{ flexDirection: 'row', margin: 20, alignItems: 'center', display: 'flex' }}>
+        <View style={{ marginTop: 15 }}>
+          <IndisiLogo />
+        </View>
         <Text style={styles.appName}>indisi</Text>
       </View>
       <View style={styles.headerView}>
@@ -144,60 +142,6 @@ const UseBiometry: React.FC = () => {
       <Text onPress={() => continueTouched()} style={styles.laterText}>
         Maybe Later
       </Text>
-
-      {/* <View style={{ flexGrow: 1 }}>
-        <View style={{ alignItems: 'center' }}>
-          <Biometrics style={[styles.image]} />
-        </View>
-        {biometryAvailable ? (
-          <View>
-            <Text style={[TextTheme.normal]}>{t('Biometry.EnabledText1')}</Text>
-            <Text></Text>
-            <Text style={[TextTheme.normal]}>
-              {t('Biometry.EnabledText2')}
-              <Text style={[TextTheme.normal, { fontWeight: 'bold' }]}> {t('Biometry.Warning')}</Text>
-            </Text>
-          </View>
-        ) : (
-          <View>
-            <Text style={[TextTheme.normal]}>{t('Biometry.NotEnabledText1')}</Text>
-            <Text></Text>
-            <Text style={[TextTheme.normal]}>{t('Biometry.NotEnabledText2')}</Text>
-          </View>
-        )}
-        <View
-          style={{
-            flexDirection: 'row',
-            marginVertical: 30,
-          }}
-        >
-          <View style={{ flexShrink: 1 }}>
-            <Text style={[TextTheme.normal, { fontWeight: 'bold' }]}>{t('Biometry.UseToUnlock')}</Text>
-          </View>
-          <View style={{ justifyContent: 'center' }}>
-            <Switch
-              accessibilityLabel={t('Biometry.Toggle')}
-              testID={testIdWithKey('ToggleBiometrics')}
-              trackColor={{ false: ColorPallet.grayscale.lightGrey, true: ColorPallet.brand.primaryDisabled }}
-              thumbColor={biometryEnabled ? ColorPallet.brand.primary : ColorPallet.grayscale.mediumGrey}
-              ios_backgroundColor={ColorPallet.grayscale.lightGrey}
-              onValueChange={toggleSwitch}
-              value={biometryEnabled}
-              disabled={!biometryAvailable}
-            />
-          </View>
-        </View>
-        <View style={{ flexGrow: 1, justifyContent: 'flex-end' }}>
-          <Button
-            title={'Continue'}
-            accessibilityLabel={'Continue'}
-            testID={testIdWithKey('Continue')}
-            onPress={continueTouched}
-            buttonType={ButtonType.Primary}
-            disabled={!continueEnabled}
-          />
-        </View>
-      </View> */}
     </SafeAreaView>
   )
 }
