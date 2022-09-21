@@ -12,6 +12,8 @@ import { Screens, Stacks, TabStackParams, TabStacks } from '../types/navigators'
 
 import CredentialStack from './CredentialStack'
 import HomeStack from './HomeStack'
+import AccountStack from './HomeStack'
+import ExploreStack from './HomeStack'
 
 const TabStack: React.FC = () => {
   const { total } = useNotifications()
@@ -21,7 +23,7 @@ const TabStack: React.FC = () => {
   const { ColorPallet, TabTheme } = useTheme()
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: ColorPallet.brand.primary }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
@@ -30,8 +32,8 @@ const TabStack: React.FC = () => {
           tabBarActiveTintColor: TabTheme.tabBarActiveTintColor,
           tabBarInactiveTintColor: TabTheme.tabBarInactiveTintColor,
           header: () => null,
-        }}
-      >
+        }}>
+
         <Tab.Screen
           name={TabStacks.HomeStack}
           component={HomeStack}
@@ -55,6 +57,26 @@ const TabStack: React.FC = () => {
           }}
         />
         <Tab.Screen
+          name={TabStacks.ExploreStack}
+          component={HomeStack}
+          options={{
+            tabBarIcon: ({ color, focused }) => <Icon name={focused ? 'file-search' : 'file-search-outline'} color={color} size={30} />,
+            tabBarBadge: total || undefined,
+            tabBarBadgeStyle: { backgroundColor: ColorPallet.semantic.error },
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={{
+                  ...TabTheme.tabBarTextStyle,
+                  color: focused ? TabTheme.tabBarActiveTintColor : TabTheme.tabBarInactiveTintColor,
+                }}
+              >
+                {t('TabStack.Explore')}
+              </Text>
+            ),
+            tabBarAccessibilityLabel: t('TabStack.Explore'),
+          }}
+        />
+        {/* <Tab.Screen
           name={TabStacks.ConnectStack}
           options={{
             tabBarIcon: () => (
@@ -90,7 +112,7 @@ const TabStack: React.FC = () => {
           })}
         >
           {() => <View />}
-        </Tab.Screen>
+        </Tab.Screen> */}
         <Tab.Screen
           name={TabStacks.CredentialStack}
           component={CredentialStack}
@@ -105,10 +127,30 @@ const TabStack: React.FC = () => {
                   color: focused ? TabTheme.tabBarActiveTintColor : TabTheme.tabBarInactiveTintColor,
                 }}
               >
-                {t('TabStack.Credentials')}
+                {t('TabStack.Wallet')}
               </Text>
             ),
-            tabBarAccessibilityLabel: t('TabStack.Credentials'),
+            tabBarAccessibilityLabel: t('TabStack.Wallet'),
+          }}
+        />
+        <Tab.Screen
+          name={TabStacks.AccountStack}
+          component={CredentialStack}
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <Icon name={focused ? 'account-circle' : 'account-circle-outline'} color={color} size={30} />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={{
+                  ...TabTheme.tabBarTextStyle,
+                  color: focused ? TabTheme.tabBarActiveTintColor : TabTheme.tabBarInactiveTintColor,
+                }}
+              >
+                {t('TabStack.Account')}
+              </Text>
+            ),
+            tabBarAccessibilityLabel: t('TabStack.Account'),
           }}
         />
       </Tab.Navigator>

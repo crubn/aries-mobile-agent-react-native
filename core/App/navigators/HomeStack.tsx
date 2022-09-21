@@ -23,11 +23,11 @@ const HomeStack: React.FC = () => {
       <Stack.Screen
         name={Screens.Home}
         component={Home}
-        options={() => ({
-          title: t('Screens.Home'),
-          headerLeft: () => <IndisiLogo />,
-          headerRight: () => <SettingsCog />,
-        })}
+      // options={() => ({
+      //   title: t('Screens.Home'),
+      //   headerLeft: () => <IndisiLogo />,
+      //   headerRight: () => <SettingsCog />,
+      // })}
       />
       <Stack.Screen
         name={Screens.Notifications}

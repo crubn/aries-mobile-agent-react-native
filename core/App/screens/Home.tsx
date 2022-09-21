@@ -6,6 +6,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, StyleSheet, View, Text, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
 
+import ScanIcon from '../assets/img/scan-floating-button.svg'
 import NotificationListItem, { NotificationType } from '../components/listItems/NotificationListItem'
 import NoNewUpdates from '../components/misc/NoNewUpdates'
 import LoadingModal from '../components/modals/LoadingModal'
@@ -19,6 +20,7 @@ import { useNotifications } from '../hooks/notifications'
 import { HomeStackParams, Screens, Stacks } from '../types/navigators'
 import { Credential as StoreCredentialState } from '../types/state'
 import { connectFromInvitation, getOobDeepLink, isRedirection, receiveMessageFromUrlRedirect } from '../utils/helpers'
+import Header from '../components/header'
 
 const { width } = Dimensions.get('window')
 const offset = 25
@@ -130,7 +132,8 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
       {loading ? (
         <LoadingModal />
       ) : (
-        <View>
+        <View style={{ display: 'flex' }}>
+          <Header />
           <View style={styles.rowContainer}>
             <Text style={[HomeTheme.notificationsHeader, styles.header]}>
               {t('Home.Notifications')}
@@ -186,7 +189,18 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
               </View>
             )}
           />
+
           <HomeContentView />
+          <TouchableOpacity
+            onPress={() => navigation.navigate(Stacks.ConnectStack, { screen: Screens.Scan })}
+            style={{
+              position: 'absolute',
+              bottom: -220,
+              right: 20,
+            }}
+          >
+            <ScanIcon />
+          </TouchableOpacity>
         </View>
       )}
     </>

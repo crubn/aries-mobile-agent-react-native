@@ -250,6 +250,9 @@ const translation = {
     "Home": "Home",
     "Scan": "Scan",
     "Credentials": "Credentials",
+    "Wallet": "Wallet",
+    "Explore": "Explore",
+    "Account": "Account",
   },
   "RootStack": {
     "Contacts": "Contacts",

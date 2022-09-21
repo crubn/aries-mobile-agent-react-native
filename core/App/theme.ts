@@ -118,7 +118,7 @@ const BrandColors: BrandColors = {
   secondaryDisabled: `rgba(53, 130, 63, ${heavyOpacity})`,
   highlight: '#FCBA19',
   primaryBackground: '#FFF',
-  secondaryBackground: '#313132',
+  secondaryBackground: '#FFF',
   modalPrimaryBackground: '#FFF',
   modalSecondaryBackground: '#313132',
   link: '#FFFFFF',

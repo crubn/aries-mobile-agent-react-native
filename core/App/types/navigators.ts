@@ -45,6 +45,8 @@ export enum TabStacks {
   HomeStack = 'Tab Home Stack',
   ConnectStack = 'Tab Connect Stack',
   CredentialStack = 'Tab Credential Stack',
+  AccountStack = 'Tab Account Stack',
+  ExploreStack = 'Tab Explore Stack',
 }
 
 export type RootStackParams = {
