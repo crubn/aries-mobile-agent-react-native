@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, StyleSheet, View, Text, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
 
 import ScanIcon from '../assets/img/scan-floating-button.svg'
+import Header from '../components/header'
 import NotificationListItem, { NotificationType } from '../components/listItems/NotificationListItem'
 import NoNewUpdates from '../components/misc/NoNewUpdates'
 import LoadingModal from '../components/modals/LoadingModal'
@@ -20,7 +21,7 @@ import { useNotifications } from '../hooks/notifications'
 import { HomeStackParams, Screens, Stacks } from '../types/navigators'
 import { Credential as StoreCredentialState } from '../types/state'
 import { connectFromInvitation, getOobDeepLink, isRedirection, receiveMessageFromUrlRedirect } from '../utils/helpers'
-import Header from '../components/header'
+import InfoCard from '../components/cards/Info'
 
 const { width } = Dimensions.get('window')
 const offset = 25
@@ -132,9 +133,24 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
       {loading ? (
         <LoadingModal />
       ) : (
-        <View style={{ display: 'flex' }}>
+        <View style={{ display: 'flex', flex: 1 }}>
           <Header />
-          <View style={styles.rowContainer}>
+          <View
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              margin: 10,
+            }}
+          >
+            <TouchableOpacity onPress={() => navigation.navigate(Stacks.ConnectStack, { screen: Screens.Scan })}>
+              <ScanIcon />
+            </TouchableOpacity>
+          </View>
+          <View style={{ margin: 20 }}>
+            <InfoCard />
+
+            {/* <View style={styles.rowContainer}>
             <Text style={[HomeTheme.notificationsHeader, styles.header]}>
               {t('Home.Notifications')}
               {notifications?.length ? ` (${notifications.length})` : ''}
@@ -188,19 +204,11 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
                 )}
               </View>
             )}
-          />
+          /> */}
 
-          <HomeContentView />
-          <TouchableOpacity
-            onPress={() => navigation.navigate(Stacks.ConnectStack, { screen: Screens.Scan })}
-            style={{
-              position: 'absolute',
-              bottom: -220,
-              right: 20,
-            }}
-          >
-            <ScanIcon />
-          </TouchableOpacity>
+            {/* <HomeContentView /> */}
+
+          </View>
         </View>
       )}
     </>
